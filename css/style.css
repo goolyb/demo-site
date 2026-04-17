@@ -1,0 +1,50 @@
+.wrapper{
+    display: flex;
+}
+
+header{
+    display: flex;
+    background: rgb(218, 218, 221);
+    width: 100%;
+    height: 150px;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 23px;
+    font-family: 'Playfair Display', serif;
+    flex-basis: 33%;
+}
+nav a::after{
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    height: 1.5px;
+    left: 0;
+}
+nav a:hover::after{
+    opacity: 0.7;
+    background: rgb(67, 67, 67);
+}
+
+nav a{
+    color: rgb(67, 67, 67);
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+}
+
+body{
+    margin: 0;                                                                                                                                                                                                                                     
+    padding: 0; 
+    font-family: 'Inter', sans-serif;                                                                                       
+}
+h1{
+    flex-basis: 33%;
+}
