@@ -4,33 +4,39 @@
 
 header{
     display: flex;
-    background: rgb(218, 218, 221);
+    background: #fad6a3;
     width: 100%;
     height: 150px;
     align-items: center;
+    position: relative;
 }
 
 nav {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    font-size: 23px;
-    font-family: 'Playfair Display', serif;
-    flex-basis: 33%;
-}
-nav a::after{
-    opacity: 0;
-    transition: opacity 0.3s;
+    gap: 30px;
+    font-size: 22px;
+    font-family: 'Nunito', sans-serif;
     position: absolute;
-    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+}
+nav a::after{                 /* make an invisible line */ 
+    opacity: 0;                 
+    transition: opacity 0.5s;
+    position: absolute;        /* : describes WHEN */
+    bottom: 0;                 /* :: describes WHAT to do */ 
     content: '';
     width: 100%;
-    height: 1.5px;
+    height: 2px;
     left: 0;
 }
-nav a:hover::after{
+nav a:hover::after{                 /* makes this line visible if u will move the cursor at it */
     opacity: 0.7;
-    background: rgb(67, 67, 67);
+    background: rgb(67, 67, 67);    
 }
 
 nav a{
@@ -45,6 +51,8 @@ body{
     padding: 0; 
     font-family: 'Inter', sans-serif;                                                                                       
 }
-h1{
-    flex-basis: 33%;
+.cafe-logo{
+    width: 180px;
+    height: auto;
+    margin-left: 50px;
 }
