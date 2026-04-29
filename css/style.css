@@ -6,7 +6,7 @@
 
 header{
     display: flex;
-    background: #f6f6f6;
+    background: rgba(255, 255, 255, 0.7);
     height: 120px;
     align-items: center;
     position: fixed;
@@ -14,8 +14,10 @@ header{
     left: 30px;
     right: 30px;
     z-index: 1000;
-    border: 3px solid rgb(186 186 186 / 0.5);
+    border: 3px solid rgb(110 110 110 / 0.3);
     border-radius: 20px;
+    backdrop-filter: blur(10px);
+
 }
 
 nav {
@@ -111,14 +113,14 @@ body{
 .info {
     display: flex;
     position: relative;
-    height: 600px;
+    height: 700px;
     align-items: center;
     margin-top: 190px;
 }
 
 .coffee-with-food {
-    height: 600px;
-    width: 1000px;
+    height: 700px;
+    width: 1167px;
     right: 0;
     position: absolute;
     -webkit-mask-image: linear-gradient(to left, black 60%, transparent);
@@ -126,26 +128,25 @@ body{
 
 .gradient{
     position: absolute;
-    right: 528px;
+    right: 667px;
     width: 500px;
-    height: 600px;
-
-    background: linear-gradient(to right, #f0e6df 20%, transparent);
+    height: 700px;
+    background: linear-gradient(to right, #ffe6d6 20%, transparent);
 }
 
 .welcome-wrapper{
     display: flex;
     height: 100%;
-    width: calc(100% - 1000px);
+    width: calc(100% - 1167px);
     align-items: center;
     justify-content: center;
-    background: #f0e6df;
+    background: #ffe6d6;
 }
 
 .welcome-window{
     display: flex;
     width: 1000px;
-    height: 500px;
+    height: 583px;
     flex-direction: column;
     padding-right: 100px;
 }
@@ -175,10 +176,10 @@ body{
     position: absolute;
     bottom: 0;
     content: '';
-    width: 7%;
+    width: 9%;
     height: 5px;
     bottom: -23px;
-    left: 7px;
+    left: 1px;
     background: #4b240c;
     border-radius: 2px;
 }
@@ -207,7 +208,7 @@ body{
     font-family: 'Nunito', sans-serif;
     cursor: pointer;
     font-weight: 700;
-    box-shadow: 0 4px 10px #9f5e2d;
+    box-shadow: 0 4px 20px #9f5e2d;
     transition: transform 0.4s;
 }
 
@@ -245,14 +246,106 @@ body{
 
 .who-are-we{
     width: 100%;
-    height: 600px;
-    padding-top: 90px;
+    height: 800px;
+    position: relative;
 }
-.who-image{
-    display: flex;
-    height: 600px;
-    width: auto;
-    margin-left: 70px;
-    border-radius: 30px;
 
+.who-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
+
+.who-overlay{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.2));
+}
+
+.who-question{
+    font-family: 'Playfair Display';
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 100px;
+    margin: 0;
+    margin-bottom: 30px;
+    position: relative;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.who-question::after{
+    opacity: 0.9;
+    display: flex;
+    transition: opacity 0.3s;
+    position: absolute;
+    content: '';
+    width: 9%;
+    height: 5px;
+    bottom: -35px;
+    left: 7px;
+    background: #f1ad46;
+    border-radius: 2px;
+}
+
+.who-description{
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    font-size: 40px;
+    color: rgba(255,255,255,0.9);
+    margin: 0;
+    top: 30px;
+    line-height: 70px;
+}
+
+.who-wrapper{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+}
+
+.who-window{
+    width: 1000px;
+    height: 500px;
+    padding-left: 100px;
+}
+
+.word-you{
+    display: inline;
+    color: #f1ad46;
+    text-shadow: 0px 3px 20px rgb(237 125 42 / 0.8);
+}
+
+.about-us{
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display';
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    transform: scale(1.1, 1);
+    color: #474747;
+}
+
+.about-us::before {
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: #474747;
+    content: '';
+    right: calc(50% + 135px);
+}
+
+.about-us::after {
+    left: calc(50% + 135px);
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: #474747;
+    content: '';
+}
+
