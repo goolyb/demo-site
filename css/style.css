@@ -1,7 +1,7 @@
 .wrapper{
     display: flex;
     flex-direction: column;
-    min-height: 200vh;
+    min-height: 1000vh;
 }
 
 header{
@@ -317,7 +317,7 @@ body{
     text-shadow: 0px 3px 20px rgb(237 125 42 / 0.8);
 }
 
-.about-us{
+.theme-1{
     display: flex;
     height: 200px;
     justify-content: center;
@@ -331,21 +331,96 @@ body{
     color: #474747;
 }
 
-.about-us::before {
+.theme-1::before {
     position: absolute;
     width: 60px;
     height: 4px;
     background: #474747;
     content: '';
-    right: calc(50% + 135px);
+    right: calc(50% + 130px);
 }
 
-.about-us::after {
-    left: calc(50% + 135px);
+.theme-1::after {
+    left: calc(50% + 130px);
     position: absolute;
     width: 60px;
     height: 4px;
     background: #474747;
     content: '';
 }
+
+.theme-2{
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display';
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    transform: scale(1.1, 1);
+    color: #474747;
+}
+
+.theme-2::before {
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: #474747;
+    content: '';
+    right: calc(50% + 165px);
+}
+
+.theme-2::after {
+    left: calc(50% + 165px);
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: #474747;
+    content: '';
+}
+
+.values-wrapper{
+    display: flex;
+    width: 100%;
+    height: 600px;
+}
+
+.values-icons{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 200px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.values-icons div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: none;
+    background: rgb(251, 200, 207, 0.5);
+
+}
+
+.values-icons div svg path {
+    fill: #57472f !important;
+}
+
+.values-icons div:nth-child(1){
+    display: flex;
+    margin-left: 550px;
+}
+
+.values-icons div:nth-child(3){
+    display: flex;
+    margin-right: 550px;
+}
+
 
