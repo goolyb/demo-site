@@ -522,7 +522,28 @@ body{
     margin-bottom: 150px;
 }
 
+.review-wrapper{
+    display: grid;
+    width: 100%;
+    height: 900px;
+    justify-content: center;
+    grid-template-columns: 1fr;
+}
 
+.review-card{
+    border: 1px solid black;
+}
 
+.review-avatar {
 
+}
 
+.person1{
+    width: 100px;
+    height: 100px;
+}
+
+.review-text1{
+    width: 500px;
+    height: 100px;
+}
