@@ -406,7 +406,7 @@ body{
     height: 150px;
     border: none;
     border-radius: 50%;
-    background: rgb(251, 200, 207, 0.5);
+    background: rgb(248 239 233);
     flex-direction: column;
     transition: transform 0.3s ease;
 }
@@ -613,3 +613,9 @@ body{
     padding-left: 7px;
 
 }
+
+.review-card:nth-child(2) .review-avatar{
+    display: flex;
+    margin-left: 200px;
+}
+
