@@ -294,7 +294,7 @@ body{
     color: rgba(255,255,255,0.9);
     margin: 0;
     top: 30px;
-    line-height: 70px;
+    line-height: 60px;
 }
 
 .who-wrapper{
@@ -525,17 +525,21 @@ body{
 .review-wrapper{
     display: grid;
     width: 100%;
-    height: 900px;
-    justify-content: center;
+    grid-template-rows: repeat(3, 300px);
     grid-template-columns: 1fr;
 }
 
 .review-card{
     border: 1px solid black;
+    display: flex;
+    align-items: center;
 }
 
 .review-avatar {
-
+    height: 100%;
+    width: 200px;
+    display: flex;
+    margin-left: 20px;
 }
 
 .person1{
@@ -544,6 +548,10 @@ body{
 }
 
 .review-text1{
-    width: 500px;
-    height: 100px;
+    width: 600px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-family: 'Inter';
+    font-size: 20px;
 }
