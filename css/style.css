@@ -540,6 +540,8 @@ body{
     width: 200px;
     display: flex;
     margin-left: 20px;
+    align-items: center;
+    justify-content: center;
 }
 
 .person1{
@@ -555,3 +557,10 @@ body{
     font-family: 'Inter';
     font-size: 20px;
 }
+
+.avatar{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
