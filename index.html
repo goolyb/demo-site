@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="wrapper">
@@ -61,36 +62,76 @@
             </div>
         </div>
         <div class="review-wrapper" >
-            <div id="review1" class="review-card">
+            <div id="review1" data-review="2025-06-14" class="review-card">
                 <div class="review-avatar">
                     <img class="avatar"  src="images/person1.png" alt="female">
                 </div>
+                <div class="review-info-wrapper">
+                    <div class="review-info"><p class="reviewer-name">Sarah Mitchell</p>
+                        <div class="stars">
+                            <span style="font-size: 17px" class="rating-number">4.8</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-stroke"></i>
+                            <div class="review-time">
+                                <span id="time1"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="review-text1">
-                    I’m absolutely blown away by this café! Everything was simply
-                    amazing, and they had the most delicious cakes you could imagine, with such a wide selection.
-                    I’m so glad we discovered it, and we will definitely come back more often. The staff was also
-                    very friendly. :)
+                    Really loved this place. The cakes are genuinely some of the best I’ve had — huge selection and everything tasted fresh. Staff was super friendly. Will definitely be back.
                 </div>
             </div>
-            <div id="review2" class="review-card">
+            <div id="review2" data-review="2026-03-05" class="review-card">
                 <div class="review-avatar">
                     <img class="avatar" src="images/person2.png" alt="male">
                 </div>
+                <div class="review-info-wrapper">
+                    <div class="review-info">
+                        <p class="reviewer-name">Thomas Brauer</p>
+                        <div class="stars">
+                            <span style="font-size: 17px" class="rating-number">5</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <div class="review-time">
+                                <span id="time2"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="review-text1">
-                    Lovely café with amazing cakes. Floral wallpaper, chandeliers,
-                    and unique ceiling decorations. Very friendly and fast service.
-                    Great breakfast selection and incredibly good cakes. Nice for sitting outside too.
-                    Absolutely recommended.
+                    Charming café with a beautiful interior — floral wallpaper, chandeliers, the whole vibe. Service was quick and the breakfast options were great. Loved sitting outside too. Highly recommend.
                 </div>
             </div>
-            <div id="review3" class="review-card">
+            <div id="review3" data-review="2025-11-10" class="review-card">
                 <div class="review-avatar">
                     <img class="avatar" src="images/person3.png" alt="female">
                 </div>
+                <div class="review-info-wrapper">
+                    <div class="review-info">
+                        <p class="reviewer-name">Elena Vasquez</p>
+                        <div class="stars">
+                            <span style="font-size: 17px" class="rating-number">4.5</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-stroke"></i>
+                            <div class="review-time">
+                                <span id="time3"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="review-text1">
                     A wonderful place to enjoy a coffee and treat yourself to something sweet.
-                    I can recommend the cinnamon roll and the matcha latte. There's a very cozy garden
-                    where you can spend a lovely time outdoors.
+                    Perfect spot for a coffee and something sweet. The cinnamon roll and matcha latte were both excellent. The garden out back is really cozy. A hidden gem in Munich.
                 </div>
             </div>
         </div>
@@ -144,8 +185,6 @@
             </div>
         </div>
     </div>
-    <script>
-
-    </script>
+    <script src="js/script.js"></script>>
 </body>
 </html>
