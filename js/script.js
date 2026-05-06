@@ -24,3 +24,14 @@ console.log(`review number 3 was ${months3} mounts ago`)
 document.getElementById("time1").textContent = `${months1} months ago`;
 document.getElementById("time2").textContent = `${months2} months ago`;
 document.getElementById("time3").textContent = `${months3} months ago`;
+
+
+const massive = document.querySelectorAll('.review-card');
+
+massive.forEach(myFunction)
+
+function myFunction(card){
+    let number = Number(card.dataset.pos);
+    card.dataset.pos = (number + 1) % 3;
+    console.log(card.dataset.pos)
+}

@@ -527,6 +527,39 @@ body{
     width: 100%;
     grid-template-rows: repeat(3, 300px);
     grid-template-columns: 1fr;
+    position: relative;
+}
+
+.review-buttons{
+    display: inline-flex;
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    gap: 15px;
+    padding-left: 800px;
+}
+
+.btns-rev{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    font-size: 16px;
+    color: #333;
+}
+
+.btns-rev:hover {
+    background: #333;
+    color: white;
 }
 
 .review-card{
