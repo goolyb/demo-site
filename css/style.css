@@ -563,7 +563,7 @@ body{
 }
 
 .review-card{
-    border: 1px solid black;
+
     display: flex;
     align-items: center;
 }

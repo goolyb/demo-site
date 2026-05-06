@@ -28,10 +28,12 @@ document.getElementById("time3").textContent = `${months3} months ago`;
 
 const massive = document.querySelectorAll('.review-card');
 
-massive.forEach(myFunction)
-
 function myFunction(card){
     let number = Number(card.dataset.pos);
     card.dataset.pos = (number + 1) % 3;
     console.log(card.dataset.pos)
 }
+
+document.getElementById("btn-up").addEventListener("click", function (){
+    massive.forEach(myFunction)
+})
