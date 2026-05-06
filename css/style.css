@@ -523,11 +523,12 @@ body{
 }
 
 .review-wrapper{
-    display: grid;
+    display: block;
     width: 100%;
-    grid-template-rows: repeat(3, 300px);
     grid-template-columns: 1fr;
     position: relative;
+    height: calc(250px * 3);
+    flex-direction: column;
 }
 
 .review-buttons{
@@ -539,7 +540,7 @@ body{
     justify-self: center;
     align-self: center;
     gap: 15px;
-    padding-left: 800px;
+    padding-left: 300px;
 }
 
 .btns-rev{
@@ -549,12 +550,10 @@ body{
     border: 2px solid #333;
     background: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: background 0.2s, color 0.2s;
     font-size: 16px;
     color: #333;
+    z-index: 10;
 }
 
 .btns-rev:hover {
@@ -562,10 +561,19 @@ body{
     color: white;
 }
 
-.review-card{
-
+.review-container{
     display: flex;
     align-items: center;
+    justify-content:center;
+    height: calc(250px * 3);
+    width: 100%;
+}
+
+.review-card{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 300px;
 }
 
 .review-avatar {
@@ -651,4 +659,3 @@ body{
     display: flex;
     margin-left: 200px;
 }
-

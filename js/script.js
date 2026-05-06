@@ -37,3 +37,23 @@ function myFunction(card){
 document.getElementById("btn-up").addEventListener("click", function (){
     massive.forEach(myFunction)
 })
+massive.forEach(function(card) {
+    let pos = Number(card.dataset.pos);
+    card.style.transform = `translateY(${pos * 250}px)`;
+})
+
+function myFunction2(card){
+    let number = Number(card.dataset.pos);
+    card.dataset.pos = (number + 2) % 3;
+    console.log(card.dataset.pos)
+}
+
+document.getElementById("btn-down").addEventListener("click", function (){
+    massive.forEach(myFunction2)
+})
+massive.forEach(function(card) {
+    let pos = Number(card.dataset.pos);
+    card.style.transform = `translateY(${pos * 250}px)`;
+})
+
+
