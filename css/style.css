@@ -580,9 +580,12 @@ body{
     height: 100%;
     width: 200px;
     display: flex;
-    margin-left: 20px;
     align-items: center;
     justify-content: center;
+}
+
+.review-avatar.active{
+    margin-left: 20px;
 }
 
 .person1{

@@ -32,6 +32,13 @@ function myFunction(card){
     let number = Number(card.dataset.pos);
     card.dataset.pos = (number + 1) % 3;
     console.log(card.dataset.pos)
+    card.style.transform = `translateY(${card.dataset.pos * 250}px)`;
+    if (Number(card.dataset.pos) === 1) {
+        card.classList.add('.review-avatar.active');
+    }
+    else {
+        card.classList.remove('.review-avatar.active')
+    }
 }
 
 document.getElementById("btn-up").addEventListener("click", function (){
@@ -46,11 +53,13 @@ function myFunction2(card){
     let number = Number(card.dataset.pos);
     card.dataset.pos = (number + 2) % 3;
     console.log(card.dataset.pos)
+    card.style.transform = `translateY(${card.dataset.pos * 250}px)`;
 }
 
 document.getElementById("btn-down").addEventListener("click", function (){
     massive.forEach(myFunction2)
 })
+
 massive.forEach(function(card) {
     let pos = Number(card.dataset.pos);
     card.style.transform = `translateY(${pos * 250}px)`;
