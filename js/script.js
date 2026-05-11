@@ -25,6 +25,8 @@ document.getElementById("time1").textContent = `${months1} months ago`;
 document.getElementById("time2").textContent = `${months2} months ago`;
 document.getElementById("time3").textContent = `${months3} months ago`;
 
+const btnUp = document.getElementById("btn-up");
+const btnDown = document.getElementById("btn-down");
 
 const massive = document.querySelectorAll('.review-card');
 
@@ -33,20 +35,22 @@ function myFunction(card){
     card.dataset.pos = (number + 1) % 3;
     console.log(card.dataset.pos)
     card.style.transform = `translateY(${card.dataset.pos * 250}px)`;
+    const avatar = card.querySelector('.review-avatar');
     if (Number(card.dataset.pos) === 1) {
-        card.classList.add('.review-avatar.active');
-    }
-    else {
-        card.classList.remove('.review-avatar.active')
+        avatar.classList.add('active');
+    } else {
+        avatar.classList.remove('active');
     }
 }
 
-document.getElementById("btn-up").addEventListener("click", function (){
+btnUp.addEventListener("click", function (){
     massive.forEach(myFunction)
 })
 massive.forEach(function(card) {
     let pos = Number(card.dataset.pos);
     card.style.transform = `translateY(${pos * 250}px)`;
+    const avatar = card.querySelector('.review-avatar');
+    if (pos === 1) avatar.classList.add('active');
 })
 
 function myFunction2(card){
@@ -54,15 +58,14 @@ function myFunction2(card){
     card.dataset.pos = (number + 2) % 3;
     console.log(card.dataset.pos)
     card.style.transform = `translateY(${card.dataset.pos * 250}px)`;
+    const avatar = card.querySelector('.review-avatar');
+    if (Number(card.dataset.pos) === 1) {
+        avatar.classList.add('active');
+    } else {
+        avatar.classList.remove('active');
+    }
 }
 
-document.getElementById("btn-down").addEventListener("click", function (){
+btnDown.addEventListener("click", function (){
     massive.forEach(myFunction2)
 })
-
-massive.forEach(function(card) {
-    let pos = Number(card.dataset.pos);
-    card.style.transform = `translateY(${pos * 250}px)`;
-})
-
-
