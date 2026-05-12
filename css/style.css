@@ -574,7 +574,7 @@ body{
     align-items: center;
     position: absolute;
     height: 300px;
-    transition: transform 0.6s ease, opacity 0.6s ease;
+    transition: transform 0.6s ease, opacity 0.4s ease;
 }
 
 .review-avatar {

@@ -76,6 +76,19 @@ function myDownFunction(card){
     } else {
         avatar.classList.remove('active');
     }
+
+    if (number === 2){
+        card.style.transform = `translateY(750px)`;
+        card.classList.add('hidden')
+        setTimeout(function() {
+            card.style.transition = 'none';
+            card.style.transform = 'translateY(0px)';
+            setTimeout(() => {
+                card.style.transition = '';
+                card.classList.remove('hidden');
+            }, 20);
+        }, 400);
+    }
 }
 
 btnDown.addEventListener("click", function (){
