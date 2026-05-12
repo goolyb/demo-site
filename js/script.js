@@ -30,7 +30,42 @@ const btnDown = document.getElementById("btn-down");
 
 const massive = document.querySelectorAll('.review-card');
 
-function myFunction(card){
+function myUpFunction(card) {
+    let number = Number(card.dataset.pos);
+        card.dataset.pos = (number + 2) % 3;
+        console.log(card.dataset.pos)
+        card.style.transform = `translateY(${card.dataset.pos * 250}px)`;
+        const avatar = card.querySelector('.review-avatar');
+        if (Number(card.dataset.pos) === 1) {
+            avatar.classList.add('active');
+        } else {
+            avatar.classList.remove('active');
+        }
+        if (number === 0){
+            card.style.transform = `translateY(-250px)`;
+            card.classList.add('hidden')
+            setTimeout(function() {
+                card.style.transition = 'none';
+                card.style.transform = 'translateY(500px)';
+                setTimeout(() => {
+                    card.style.transition = '';
+                    card.classList.remove('hidden');
+                }, 20);
+            }, 400);
+        }
+}
+
+btnUp.addEventListener("click", function (){
+    massive.forEach(myUpFunction)
+})
+massive.forEach(function(card) {
+    let pos = Number(card.dataset.pos);
+    card.style.transform = `translateY(${pos * 250}px)`;
+    const avatar = card.querySelector('.review-avatar');
+    if (pos === 1) avatar.classList.add('active');
+})
+
+function myDownFunction(card){
     let number = Number(card.dataset.pos);
     card.dataset.pos = (number + 1) % 3;
     console.log(card.dataset.pos)
@@ -43,29 +78,6 @@ function myFunction(card){
     }
 }
 
-btnUp.addEventListener("click", function (){
-    massive.forEach(myFunction)
-})
-massive.forEach(function(card) {
-    let pos = Number(card.dataset.pos);
-    card.style.transform = `translateY(${pos * 250}px)`;
-    const avatar = card.querySelector('.review-avatar');
-    if (pos === 1) avatar.classList.add('active');
-})
-
-function myFunction2(card){
-    let number = Number(card.dataset.pos);
-    card.dataset.pos = (number + 2) % 3;
-    console.log(card.dataset.pos)
-    card.style.transform = `translateY(${card.dataset.pos * 250}px)`;
-    const avatar = card.querySelector('.review-avatar');
-    if (Number(card.dataset.pos) === 1) {
-        avatar.classList.add('active');
-    } else {
-        avatar.classList.remove('active');
-    }
-}
-
 btnDown.addEventListener("click", function (){
-    massive.forEach(myFunction2)
+    massive.forEach(myDownFunction)
 })
