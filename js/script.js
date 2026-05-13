@@ -29,6 +29,7 @@ const btnUp = document.getElementById("btn-up");
 const btnDown = document.getElementById("btn-down");
 
 const massive = document.querySelectorAll('.review-card');
+let isAnimating = false;
 
 function myUpFunction(card) {
     let number = Number(card.dataset.pos);
@@ -56,7 +57,10 @@ function myUpFunction(card) {
 }
 
 btnUp.addEventListener("click", function (){
-    massive.forEach(myUpFunction)
+    if (isAnimating) return;
+    isAnimating = true;
+    massive.forEach(myUpFunction);
+    setTimeout(() => isAnimating = false, 700);
 })
 massive.forEach(function(card) {
     let pos = Number(card.dataset.pos);
@@ -92,5 +96,8 @@ function myDownFunction(card){
 }
 
 btnDown.addEventListener("click", function (){
+    if (isAnimating) return;
+    isAnimating = true;
+    setTimeout(() => isAnimating = false, 700);
     massive.forEach(myDownFunction)
 })

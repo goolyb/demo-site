@@ -540,7 +540,7 @@ body{
     justify-self: center;
     align-self: center;
     gap: 15px;
-    padding-left: 400px;
+    padding-left: 470px;
 }
 
 .btns-rev{
@@ -658,10 +658,12 @@ body{
 .review-card .review-avatar{
     display: flex;
     margin-left: 20px;
+    transition: margin-left 0.6s ease;
 }
 
 .review-avatar.active{
     margin-left: 200px;
+    transition: margin-left 0.6s ease;
 }
 
 .review-card.hidden {
