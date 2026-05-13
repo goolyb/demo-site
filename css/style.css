@@ -540,7 +540,7 @@ body{
     justify-self: center;
     align-self: center;
     gap: 15px;
-    padding-left: 300px;
+    padding-left: 400px;
 }
 
 .btns-rev{
@@ -574,7 +574,7 @@ body{
     align-items: center;
     position: absolute;
     height: 300px;
-    transition: transform 0.6s ease, opacity 0.4s ease;
+    transition: transform 0.6s ease, opacity 0.3s ease;
 }
 
 .review-avatar {
