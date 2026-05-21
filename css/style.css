@@ -822,3 +822,13 @@ body{
     border: 0;
     display: block;
 }
+
+.foot-discri-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foot-discri{
+
+}
