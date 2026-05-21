@@ -1,7 +1,7 @@
 .wrapper{
     display: flex;
     flex-direction: column;
-    min-height: 1000vh;
+    min-height: 200vh;
 }
 
 header{
@@ -710,4 +710,115 @@ body{
     right: 0;
 }
 
+.footer{
+    display: flex;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 600px;
+    background: rgb(131 67 37 / 0.93);
+    color: #ffe6d6;
+    position: relative;
+    flex-direction: column;
+}
 
+
+.footer a {
+    color: #f1ad46;
+}
+
+.foot-nav h4 {
+    color: #ffffff;
+    font-family: 'SansSerif', sans-serif;
+    font-size: 29px;
+    margin-bottom: 5px;
+}
+
+.foot-nav{
+    flex-direction: column;
+    display: flex;
+    width: fit-content;
+    margin-left: 45px;
+}
+
+.foot-nav:nth-child(2){
+    margin-left: 105px;
+}
+
+.foot-nav a {
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    color: #ffe6d6;
+    transition: transform 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+.foot-nav a::after{
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    height: 2px;
+    left: 0;
+    background: #f1ad46;
+}
+.foot-nav a:hover::after{
+    opacity: 0.7;
+    background: #f1ad46;
+}
+
+.foot-nav a:hover{
+    transform: scale(1.05);
+    color: #f1ad46;
+}
+
+
+.copyright{
+    margin-top: auto;
+    margin-left: 15px;
+}
+
+.footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 50px;
+    color: #ffe6d6;
+    margin: 0 0 5px 0;
+}
+
+.footer-col{
+    margin-left: 40px;
+    margin-top: 60px;
+}
+
+.footer-col p{
+    margin-left: 2px;
+    margin-top: 3px;
+}
+
+.foot-nav-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-map{
+    width: 480px;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    position: absolute;
+    top: 100px;
+    right: 700px;
+}
+
+.footer-map iframe{
+    width: 90%;
+    height: 90%;
+    border: 0;
+    display: block;
+}
