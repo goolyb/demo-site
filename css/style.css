@@ -716,12 +716,16 @@ body{
     left: 0;
     bottom: 0;
     height: 600px;
-    background: rgb(131 67 37 / 0.93);
+    background: rgba(39, 17, 6, 0.93);
     color: #ffe6d6;
     position: relative;
-    flex-direction: column;
+    flex-direction: row;
 }
 
+.footer-row{
+    flex-direction: column;
+    display: flex;
+}
 
 .footer a {
     color: #f1ad46;
@@ -811,9 +815,8 @@ body{
     aspect-ratio: 1 / 1;
     border-radius: 10px;
     overflow: hidden;
-    position: absolute;
-    top: 100px;
-    right: 700px;
+
+
 }
 
 .footer-map iframe{
@@ -825,10 +828,93 @@ body{
 
 .foot-discri-wrapper{
     display: flex;
-    justify-content: center;
     align-items: center;
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .foot-discri{
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    color: #ffe6d6;
+}
 
+.foot-discri h4{
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.foot-discri h4::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #f1ad46;
+    border-radius: 2px;
+}
+
+.foot-discri p{
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0;
+    color: rgba(255, 230, 214, 0.9);
+    letter-spacing: 0.3px;
+}
+
+.foot-location{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+    color: #ffe6d6;
+    padding: 20px 26px;
+    border: 1px solid rgba(241, 173, 70, 0.35);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    width: fit-content;
+}
+
+.foot-location:hover{
+    border-color: #f1ad46;
+    background: rgba(241, 173, 70, 0.08);
+    transform: translateY(-2px);
+}
+
+.foot-location-icon{
+    width: 34px;
+    height: 34px;
+    color: #f1ad46;
+    flex-shrink: 0;
+}
+
+.foot-location-text{
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(255, 230, 214, 0.85);
+    letter-spacing: 0.3px;
+}
+
+.foot-location-text strong{
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 3px;
+    letter-spacing: 0.4px;
 }
