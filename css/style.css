@@ -113,42 +113,45 @@ body{
 .info {
     display: flex;
     position: relative;
-    height: 400px;
+    height: 600px;
     align-items: center;
-    margin-top: 190px;
+    margin-top: 170px;
 }
 
 .coffee-with-food {
     height: 100%;
-    width: 500px;
-    right: 0;
+    width: 70%;
+    right: -2%;
     position: absolute;
-    -webkit-mask-image: linear-gradient(to left, black 60%, transparent);
+    -webkit-mask-image: linear-gradient(to left, black 55%, transparent);
 }
 
 .gradient{
     position: absolute;
-    right: 667px;
-    width: 500px;
-    height: 700px;
-    background: linear-gradient(to right, #ffe6d6 20%, transparent);
+    right: 30%;
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(to right, #ffe6d6 40%, transparent);
 }
 
 .welcome-wrapper{
     display: flex;
     height: 100%;
-    width: calc(100% - 1167px);
+    width: 45%;
+    min-width: 500px;
     align-items: center;
     justify-content: center;
     background: #ffe6d6;
+    z-index:999;
 }
 
 .welcome-window{
     display: flex;
-    width: 1000px;
-    height: 583px;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
     flex-direction: column;
-    padding-right: 100px;
+    padding: 40px;
 }
 .welcome-to{
     font-family: 'Inter', sans-serif;
@@ -156,15 +159,15 @@ body{
     color: #a7663a;
     margin: 0;
     margin-top: 20px;
-    margin-left: 25px;
+    margin-left: 5%;
     margin-bottom: 0px;
 }
 
 .welcome-name{
     color: #4b240c;
-    font-size: 100px;
+    font-size: 5rem;
     margin: 0;
-    margin-left: 20px;
+    margin-left: 4%;
     margin-bottom: 50px;
     position: relative;
 }
@@ -182,16 +185,17 @@ body{
     left: 1px;
     background: #4b240c;
     border-radius: 2px;
+    margin-left: 1%;
 }
 
 .welcome-description{
     display: flex;
     font-family: 'Inter', sans-serif;
-    font-size: 30px;
+    font-size: 1.7rem;
     color: #4e4e4e;
     margin: 0;
-    margin-left: 24px;
-    line-height: 48px;
+    margin-left: 5%;
+    line-height: 40px;
 }
 
 .menu-btn{
@@ -241,7 +245,7 @@ body{
     display: flex;
     margin-top: 30px;
     gap: 25px;
-    margin-left: 17px;
+    margin-left: 25px;
 }
 
 .who-are-we{
