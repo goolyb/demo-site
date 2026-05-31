@@ -250,7 +250,7 @@ body{
 
 .who-are-we{
     width: 100%;
-    height: 800px;
+    height: 600px;
     position: relative;
 }
 
@@ -264,15 +264,16 @@ body{
 .who-overlay{
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.2));
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2));
 }
 
 .who-question{
     font-family: 'Playfair Display';
     color: #ffffff;
     font-weight: bold;
-    font-size: 100px;
+    font-size: 6rem;
     margin: 0;
+    margin-top: 4%;
     margin-bottom: 30px;
     position: relative;
     text-shadow: 0 2px 20px rgba(0,0,0,0.4);
@@ -294,7 +295,7 @@ body{
 .who-description{
     font-family: 'Inter', sans-serif;
     position: relative;
-    font-size: 40px;
+    font-size: 2.2rem;
     color: rgba(255,255,255,0.9);
     margin: 0;
     top: 30px;
@@ -305,14 +306,13 @@ body{
     position: absolute;
     inset: 0;
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding-left: 80px;
 }
 
 .who-window{
     width: 1000px;
     height: 500px;
-    padding-left: 100px;
 }
 
 .word-you{
