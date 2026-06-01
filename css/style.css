@@ -529,10 +529,9 @@ body{
 .review-wrapper{
     display: block;
     width: 100%;
-    grid-template-columns: 1fr;
     position: relative;
-    height: calc(250px * 3);
-    flex-direction: column;
+    height: calc(170px * 3);
+    overflow: hidden;
 }
 
 .review-buttons{
@@ -541,10 +540,9 @@ body{
     height: fit-content;
     position: absolute;
     flex-direction: column;
-    justify-self: center;
     align-self: center;
     gap: 15px;
-    padding-left: 470px;
+    right: 5%;
 }
 
 .btns-rev{
@@ -554,10 +552,17 @@ body{
     border: 2px solid #333;
     background: none;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
     font-size: 16px;
     color: #333;
     z-index: 10;
+    outline: none;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.btns-rev:active {
+    transform: scale(0.95);
 }
 
 .btns-rev:hover {
@@ -569,7 +574,7 @@ body{
     display: flex;
     align-items: center;
     justify-content:center;
-    height: calc(250px * 3);
+    height: calc(170px * 3);
     width: 100%;
 }
 
@@ -577,13 +582,14 @@ body{
     display: flex;
     align-items: center;
     position: absolute;
-    height: 300px;
+    height: 170px;
+    width: 100%;
     transition: transform 0.6s ease, opacity 0.3s ease;
 }
 
 .review-avatar {
     height: 100%;
-    width: 200px;
+    width: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -596,11 +602,11 @@ body{
 
 .review-text1{
     width: 600px;
-    height: 100%;
+    height: fit-content;
     display: flex;
     align-items: center;
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
+    font-size: 1.1rem;
     line-height: 25px;
 }
 
@@ -611,7 +617,7 @@ body{
 }
 
 .review-info-wrapper{
-    height: 100%;
+    height: 170px;
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -693,12 +699,12 @@ body{
 
 .review-card .review-avatar{
     display: flex;
-    margin-left: 20px;
+
     transition: margin-left 0.6s ease;
 }
 
 .review-avatar.active{
-    margin-left: 200px;
+    margin-left: 10%;
     transition: margin-left 0.6s ease;
 }
 
