@@ -1,7 +1,7 @@
 .wrapper{
     display: flex;
     flex-direction: column;
-    min-height: 200vh;
+    min-height: 100vh;
 }
 
 header{
@@ -11,8 +11,10 @@ header{
     align-items: center;
     position: fixed;
     top: 30px;
+    transition: top 0.3s ease;
     left: 30px;
-    right: 30px;
+    width: calc(100vw - 60px);
+    overflow: hidden;
     z-index: 1000;
     border: 3px solid rgb(110 110 110 / 0.3);
     border-radius: 20px;
@@ -57,9 +59,9 @@ nav a{
 }
 
 body{
-    margin: 0;                                                                                                                                                                                                                                     
-    padding: 0; 
-    font-family: 'Inter', sans-serif;                                                                                       
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
 }
 .cafe-logo{
     width: 260px;
@@ -116,10 +118,11 @@ body{
     height: 600px;
     align-items: center;
     margin-top: 170px;
+    overflow: hidden;
 }
 
 .coffee-with-food {
-    height: 100%;
+    height: 132%;
     width: 70%;
     right: -2%;
     position: absolute;
@@ -131,7 +134,7 @@ body{
     right: 30%;
     width: 600px;
     height: 600px;
-    background: linear-gradient(to right, #ffe6d6 40%, transparent);
+    background: linear-gradient(to right, #ffe6d6 20%, transparent);
 }
 
 .welcome-wrapper{
@@ -152,20 +155,21 @@ body{
     height: auto;
     flex-direction: column;
     padding: 40px;
+    margin-left: 8%;
+    margin-bottom: 5%;
 }
 .welcome-to{
     font-family: 'Inter', sans-serif;
-    font-size: 40px;
+    font-size: 2.9rem;
     color: #a7663a;
     margin: 0;
-    margin-top: 20px;
     margin-left: 5%;
     margin-bottom: 0px;
 }
 
 .welcome-name{
     color: #4b240c;
-    font-size: 5rem;
+    font-size: 6rem;
     margin: 0;
     margin-left: 4%;
     margin-bottom: 50px;
@@ -191,7 +195,7 @@ body{
 .welcome-description{
     display: flex;
     font-family: 'Inter', sans-serif;
-    font-size: 1.7rem;
+    font-size: 2rem;
     color: #4e4e4e;
     margin: 0;
     margin-left: 5%;
@@ -199,14 +203,14 @@ body{
 }
 
 .menu-btn{
-    width: 200px;
-    height: 65px;
+    width: 170px;
+    height: 55px;
     border-radius: 8px;
     border: none;
     background: #9f5e2d;
     text-transform: uppercase;
     color: white;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 0.7;
     letter-spacing: 1.5px;
     font-family: 'Nunito', sans-serif;
@@ -221,14 +225,14 @@ body{
 }
 
 .about-btn{
-    width: 200px;
-    height: 65px;
+    width: 170px;
+    height: 55px;
     border-radius: 8px;
     border: 2.5px solid rgba(159, 94, 45, 0.8);
     background: none;
     font-family: 'Nunito', sans-serif;
     color: #9f5e2d;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 0.7;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -306,13 +310,13 @@ body{
     position: absolute;
     inset: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
 .who-window{
     width: 1000px;
     height: 500px;
+    margin-left: 7%;
 }
 
 .word-you{
@@ -323,11 +327,11 @@ body{
 
 .theme-1{
     display: flex;
-    height: 200px;
+    height: 150px;
     justify-content: center;
     align-items: center;
     font-family: 'Playfair Display';
-    font-size: 45px;
+    font-size: 2.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 500;
@@ -337,17 +341,17 @@ body{
 
 .theme-1::before {
     position: absolute;
-    width: 60px;
+    width: 50px;
     height: 4px;
     background: #474747;
     content: '';
-    right: calc(50% + 130px);
+    right: calc(50% + 120px);
 }
 
 .theme-1::after {
-    left: calc(50% + 130px);
+    left: calc(50% + 120px);
     position: absolute;
-    width: 60px;
+    width: 50px;
     height: 4px;
     background: #474747;
     content: '';
@@ -421,12 +425,10 @@ body{
 
 .values-icons div:nth-child(1){
     display: flex;
-    margin-left: 500px;
 }
 
 .values-icons div:nth-child(3){
     display: flex;
-    margin-right: 500px;
 }
 
 .values-icons > div:hover{
@@ -454,12 +456,10 @@ body{
 
 .values-text1 div:nth-child(1){
     display: flex;
-    margin-left: 500px;
 }
 
 .values-text1 div:nth-child(3){
     display: flex;
-    margin-right: 500px;
 }
 
 .values-text2{
@@ -482,7 +482,6 @@ body{
 
 .values-text2 div:nth-child(1){
     display: flex;
-    margin-left: 300px;
     margin-top: 10px;
 }
 
@@ -493,7 +492,6 @@ body{
 
 .values-text2 div:nth-child(3){
     display: flex;
-    margin-right: 300px;
     margin-top: 30px;
 }
 

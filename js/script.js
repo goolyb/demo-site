@@ -101,3 +101,4 @@ btnDown.addEventListener("click", function (){
     setTimeout(() => isAnimating = false, 700);
     massive.forEach(myDownFunction)
 })
+
