@@ -332,68 +332,95 @@ body{
     text-shadow: 0px 3px 20px rgb(237 125 42 / 0.8);
 }
 
-.theme-1{
+.theme-text{
     display: flex;
     height: 150px;
     justify-content: center;
     align-items: center;
     font-family: 'Playfair Display';
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 500;
     transform: scale(1.1, 1);
     color: #474747;
+    position: relative;
 }
 
-.theme-1::before {
+/* about us */
+#about::before {
+    content: '';
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     width: 50px;
     height: 4px;
     background: #474747;
-    content: '';
-    right: calc(50% + 120px);
+    right: calc(50% + 125px);
 }
 
-.theme-1::after {
-    left: calc(50% + 120px);
+#about::after {
+    content: '';
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     width: 50px;
     height: 4px;
     background: #474747;
+    left: calc(50% + 125px);
+}
+
+/* our values */
+#values::before {
     content: '';
-}
-
-.theme-2{
-    display: flex;
-    height: 200px;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Playfair Display';
-    font-size: 45px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 500;
-    transform: scale(1.1, 1);
-    color: #474747;
-}
-
-.theme-2::before {
     position: absolute;
-    width: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
     height: 4px;
     background: #474747;
-    content: '';
-    right: calc(50% + 165px);
+    right: calc(50% + 155px);
 }
 
-.theme-2::after {
-    left: calc(50% + 165px);
+#values::after {
+    content: '';
     position: absolute;
-    width: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
     height: 4px;
     background: #474747;
+    left: calc(50% + 155px);
+}
+
+/* our favorites  */
+#menu .theme-text::before{
     content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 4px;
+    background: #474747;
+    right: calc(50% + 195px);
+}
+
+#menu .theme-text::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 4px;
+    background: #474747;
+    left: calc(50% + 195px);
+}
+
+
+.our-favorites-positions{
+    height: 600px;
+    width: 100%;
+    border: 1px solid black;
 }
 
 .values-wrapper{
