@@ -1,0 +1,10 @@
+.agents/
+skiils-lock.json
+.claude/
+
+.idea/
+.vscode/
+
+.Ds_store
+Thumbs.db
+font-preview.html
