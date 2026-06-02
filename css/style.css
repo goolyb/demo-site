@@ -771,6 +771,11 @@ body{
     font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
     line-height: 25px;
+    transition: opacity 0.6s ease;
+}
+
+.review-text1.faded{
+    opacity: 0;
 }
 
 .avatar{
@@ -851,6 +856,10 @@ body{
     flex-direction: column;
     margin-bottom: 30px;
     transition: opacity ease 0.6s;
+}
+
+.review-info.active{
+    opacity: 1;
 }
 
 .review-info.hidden{
