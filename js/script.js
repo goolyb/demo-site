@@ -25,8 +25,12 @@ document.getElementById("time1").textContent = `${months1} months ago`;
 document.getElementById("time2").textContent = `${months2} months ago`;
 document.getElementById("time3").textContent = `${months3} months ago`;
 
+const header = document.querySelector('header');
 const btnUp = document.getElementById("btn-up");
 const btnDown = document.getElementById("btn-down");
+const reviewInfo1 = document.getElementById("review-info1")
+const reviewInfo2 = document.getElementById("review-info2")
+const reviewInfo3 = document.getElementById("review-info3")
 
 const massive = document.querySelectorAll('.review-card');
 let isAnimating = false;
@@ -102,3 +106,21 @@ btnDown.addEventListener("click", function (){
     massive.forEach(myDownFunction)
 })
 
+let lastScroll = 0;
+let hideTimer;
+window.addEventListener('scroll', function () {
+    const current = window.scrollY;
+    if (current > lastScroll) {
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => header.classList.add('hidden'), 2000)
+    } else {
+        clearTimeout(hideTimer);
+        header.classList.remove('hidden');
+    }
+
+    if (current < 50) {
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => header.classList.add('hidden'), 2000)
+    }
+    lastScroll = current;
+});
