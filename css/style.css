@@ -130,10 +130,9 @@ body{
     padding-top: 10px;
 }
 
-.fa-solid{
+.fa-location-dot{
     margin-right: 10px;
     font-size: 1.6rem;
-
 }
 
 
@@ -1118,20 +1117,20 @@ body{
     display: flex;
     width: 100%;
     padding: 120px 0;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
 }
 
 .contact-info{
     display: flex;
     flex-direction: column;
-    gap: 26px;
+    gap: 20px;
     width: 30%;
     height: auto;
     margin-left: 10%;
     padding: 50px 40px;
     border-radius: 20px;
-    background: linear-gradient(to bottom, #fdd8a5, white);
+    background: linear-gradient(to bottom, #ffd194, white);
     box-shadow: 4px 8px 40px -4px rgba(75 36 12 / 0.19);
 }
 
@@ -1148,13 +1147,6 @@ body{
     border-top: none;
 }
 
-.contact-form{
-    display: flex;
-    width: 40%;
-    height: 80%;
-    margin-right: 12%;
-}
-
 .contact-text {
     font-family: 'Dm Sans', sans-serif;
     color: #4b240c;
@@ -1168,13 +1160,41 @@ body{
     margin-top: -10px;
 }
 
+.contact-title::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: #a17022;
+    margin-top: 8px;
+}
+
+
 .contact-head {
-    font-size: 1.65rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.fa-solid {
+    position: relative;
+    top: -1px;
+}
+
+.fa-regula{
+    position: relative;
+    top: -1px;
+}
+
+.fa-solid{
+    position: relative;
+    top: -1px;
 }
 
 .contact-2{
     font-weight: 500;
-    font-size: 1.45rem;
+    font-size: 1.1rem;
+    opacity: 0.6;
 }
 
 .contact-link{
@@ -1201,5 +1221,97 @@ body{
 }
 
 .contact-hours span:nth-child(odd){
+    font-weight: 600;
+}
+
+.contact-form{
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: 35%;
+    margin-right: 15%;
+}
+
+.field label{
+    display:block;
+    font-size:.85rem;
+    color:rgba(255,246,234,.65);
+    margin-bottom: 5px;
+}
+
+.field-name{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-name .my-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+.input-wrapper .field-name {
+    flex: 1;
+}
+
+.third {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.forth{
+    height: 140px !important;
+    padding-top: 10px;
+}
+
+
+.my-input{
+    font-family: "DM Sans", sans-serif;
+    height: 50px;
+    outline: none;
+    border: 2px solid rgb(78 78 78 / 0.48);
+    padding-left: 12px;
+    box-shadow: none;
+    border-radius: 7px;
+    caret-color: #000000;
+    transition: box-shadow 0.2s ease;
+
+}
+
+.my-input:focus{
+    box-shadow: 0 0 3px 3px rgb(33 31 31 / 0.15);
+}
+
+.my-label {
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    margin-bottom: 3px;
+}
+
+input::placeholder {
+    font-size: 1.2rem;
+}
+
+.input-wrapper{
+    display: flex;
+    gap: 52px;
+}
+
+.third{
+    width: 220%;
+}
+
+.Send-us{
+    display: flex;
+    font-family: "Fraunces", sans-serif;
+    margin: 0;
+    font-size: 4rem;
     font-weight: 600;
 }
