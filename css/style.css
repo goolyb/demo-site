@@ -704,7 +704,7 @@ body{
     flex-direction: column;
     align-self: center;
     gap: 15px;
-    right: 5%;
+    right: 27%;
 }
 
 .btns-rev{
@@ -800,7 +800,7 @@ body{
 
 .review-info-wrapper{
     height: 170px;
-    width: 400px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -953,6 +953,7 @@ body{
     color: #ffe6d6;
     transition: transform 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
     position: relative;
+    align-self: flex-start;
 }
 
 .foot-nav a::after{
@@ -978,8 +979,9 @@ body{
 
 
 .copyright{
-    margin-top: auto;
-    margin-left: 15px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
 .footer-brand {
@@ -991,7 +993,7 @@ body{
 
 .footer-col{
     margin-left: 40px;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .footer-col p{
@@ -1038,6 +1040,8 @@ body{
 }
 
 .foot-discri h4{
+    display: flex;
+    justify-content: center;
     font-family: 'Playfair Display', serif;
     font-size: 42px;
     font-weight: 600;
@@ -1052,9 +1056,10 @@ body{
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 2px;
     background: #f1ad46;
     border-radius: 2px;
 }
