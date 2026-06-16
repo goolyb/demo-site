@@ -909,7 +909,8 @@ body{
     right: 0;
     left: 0;
     bottom: 0;
-    height: 500px;
+    min-height: 500px;
+    padding-bottom: 50px;
     background: rgba(39, 17, 6, 0.93);
     color: #ffe6d6;
     position: relative;
@@ -917,9 +918,13 @@ body{
 }
 
 .footer-row{
-    flex-direction: column;
+    flex-direction: row;
     display: flex;
     flex: 1;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 50px;
+    gap: 40px;
 }
 
 .footer a {
@@ -940,15 +945,15 @@ body{
     display: flex;
     width: fit-content;
     gap: 8px;
+
 }
 
 .foot-nav-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 105px;
-    margin-top: -230px;
-    margin-right: 23%;
+    gap: 60px;
+    margin-top: 30px;
 }
 
 
@@ -1050,10 +1055,19 @@ body{
 .foot-discri-wrapper{
     display: flex;
     align-items: center;
-    position: absolute;
-    left: 68%;
-    top: 30%;
-    transform: translate(-50%, -50%);
+}
+
+.right-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: fit-content;
+}
+
+.right-top{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
 .foot-discri{
@@ -1098,12 +1112,8 @@ body{
 .foot-discri-wrapper2{
     display: flex;
     align-items: center;
-    position: absolute;
-    left: 88%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-    width: max-content;
 }
+
 
 .foot-location{
     display: flex;
@@ -1510,5 +1520,12 @@ input::placeholder {
 }
 
 .email-send{
-
+    display: flex;
+    flex-direction: column;
+    color: #ffe6d6;
+    padding: 16px 20px;
+    border: 1px solid rgba(241, 173, 70, 0.35);
+    border-radius: 14px;
+    margin-right: 40px;
 }
+
