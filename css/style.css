@@ -909,7 +909,7 @@ body{
     right: 0;
     left: 0;
     bottom: 0;
-    height: 600px;
+    height: 500px;
     background: rgba(39, 17, 6, 0.93);
     color: #ffe6d6;
     position: relative;
@@ -919,6 +919,7 @@ body{
 .footer-row{
     flex-direction: column;
     display: flex;
+    flex: 1;
 }
 
 .footer a {
@@ -927,28 +928,36 @@ body{
 
 .foot-nav h4 {
     color: #ffffff;
-    font-family: 'SansSerif', sans-serif;
-    font-size: 29px;
-    margin-bottom: 5px;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
 }
 
 .foot-nav{
     flex-direction: column;
     display: flex;
     width: fit-content;
-    margin-left: 45px;
+    gap: 8px;
 }
 
-.foot-nav:nth-child(2){
-    margin-left: 105px;
+.foot-nav-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 105px;
+    margin-top: -230px;
+    margin-right: 23%;
 }
+
 
 .foot-nav a {
     text-decoration: none;
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
     margin-bottom: 5px;
     color: #ffe6d6;
     transition: transform 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
@@ -980,11 +989,17 @@ body{
 
 .copyright{
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     left: 10px;
 }
 
-.footer-brand {
+.footer-brand{
+    position: relative;
+    left: 2%;
+    width: fit-content;
+}
+
+.footer-brand h2{
     font-family: 'Playfair Display', serif;
     font-size: 50px;
     color: #ffe6d6;
@@ -992,8 +1007,22 @@ body{
 }
 
 .footer-col{
-    margin-left: 40px;
     margin-top: 40px;
+}
+
+.footer-brand-p1{
+    font-size: 1rem;
+    font-family: 'Dm Sans', serif;
+    text-transform: uppercase;
+    color: #f1ad46;
+}
+
+.footer-brand-p2{
+    width: fit-content;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    margin-top: 20px;
+
 }
 
 .footer-col p{
@@ -1001,10 +1030,6 @@ body{
     margin-top: 3px;
 }
 
-.foot-nav-wrapper{
-    display: flex;
-    flex-direction: row;
-}
 
 .footer-map{
     width: 480px;
@@ -1026,8 +1051,8 @@ body{
     display: flex;
     align-items: center;
     position: absolute;
-    left: 80%;
-    top: 50%;
+    left: 68%;
+    top: 30%;
     transform: translate(-50%, -50%);
 }
 
@@ -1041,7 +1066,6 @@ body{
 
 .foot-discri h4{
     display: flex;
-    justify-content: center;
     font-family: 'Playfair Display', serif;
     font-size: 42px;
     font-weight: 600;
@@ -1056,8 +1080,6 @@ body{
     content: '';
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
     width: 70px;
     height: 2px;
     background: #f1ad46;
@@ -1071,6 +1093,16 @@ body{
     margin: 0;
     color: rgba(255, 230, 214, 0.9);
     letter-spacing: 0.3px;
+}
+
+.foot-discri-wrapper2{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 88%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    width: max-content;
 }
 
 .foot-location{
@@ -1087,7 +1119,23 @@ body{
     width: fit-content;
 }
 
-.foot-location:hover{
+.foot-location2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+    color: #ffe6d6;
+    padding: 20px 26px;
+    border: 1px solid rgba(241, 173, 70, 0.35);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    width: fit-content;
+}
+
+.foot-location:hover,
+.foot-location2:hover{
     border-color: #f1ad46;
     background: rgba(241, 173, 70, 0.08);
     transform: translateY(-2px);
@@ -1188,6 +1236,12 @@ body{
     margin-top: 8px;
 }
 
+.footer-social{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
 
 .contact-head {
     font-size: 1.1rem;
@@ -1424,3 +1478,37 @@ input::placeholder {
     box-shadow: 0 3px 8px rgba(75, 36, 12, 0.3);
 }
 
+.social-link-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 0.07em solid #9f5e2d;
+    color: #9f5e2d;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: background 0.4s, color 0.4s, transform 0.4s;
+}
+
+.social-link-footer:hover{
+    background: #9f5e2d;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.foot-hours{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.foot-clock-icon{
+    font-size: 34px;
+    color: #f1ad46;
+}
+
+.email-send{
+
+}
