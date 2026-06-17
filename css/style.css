@@ -1061,18 +1061,17 @@ body{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: fit-content;
+    align-items: stretch;
 }
 
 .right-top{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap: 20px;
+    gap: 70px;
 }
 
 .foot-discri{
-    margin-right: 40px;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -1527,9 +1526,8 @@ input::placeholder {
     padding: 16px 20px;
     border: 1px solid rgba(241, 173, 70, 0.35);
     border-radius: 14px;
-    margin-left: -220px;
-    margin-right: 40px;
     margin-top: 60px;
+
 }
 
 .loop-icon{
