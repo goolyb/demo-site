@@ -1067,6 +1067,7 @@ body{
 .right-top{
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     gap: 20px;
 }
 
@@ -1521,11 +1522,105 @@ input::placeholder {
 
 .email-send{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: #ffe6d6;
     padding: 16px 20px;
     border: 1px solid rgba(241, 173, 70, 0.35);
     border-radius: 14px;
+    margin-left: -220px;
     margin-right: 40px;
+    margin-top: 60px;
 }
 
+.loop-icon{
+    align-self: center;
+    flex-shrink: 0;
+    width: 110px;
+    height: auto;
+    margin-right: 16px;
+}
+
+.email-send-text{
+    width: fit-content;
+    min-width: 300px;
+}
+
+.email-send-text h4{
+    font-family: 'Playfair Display', serif;
+    font-size: 2.3rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.email-send-text p{
+    font-size: 1.1rem;
+    line-height: 30px;
+}
+
+.email-form{
+    align-self: center;
+    display: flex;
+    width: 60%;
+    margin-left: 20px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+    background: #362218;
+}
+
+.email-form:focus-within{
+    box-shadow: 0 0 0 3px rgba(241, 173, 70, 0.15);
+}
+
+.email-input{
+    flex: 1;
+    min-width: 0;
+    padding: 0.9em 1.1em;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    color: #ffe6d6;
+    background: rgba(255, 230, 214, 0.04);
+    border: 1px solid rgba(241, 173, 70, 0.35);
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.email-btn{
+    flex-shrink: 0;
+    padding: 0 1.2em;
+    font-size: 1.25rem;
+    color: #2a1a12;
+    background: #d29444;
+    border: 1px solid #d29444;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.email-btn:hover{
+    background: #ffc266;
+}
+
+.email-btn:active{
+    transform: scale(0.97);
+}
+
+.email-input::placeholder{
+    color: rgba(255, 230, 214, 0.5);
+    letter-spacing: 0.3px;
+}
+
+.email-input:focus{
+    border-color: #f1ad46;
+    background: rgba(255, 230, 214, 0.08);
+}
+
+.email-form:focus-within .email-btn{
+    border-color: #f1ad46;
+}
+
+.loop-icon{
+    height: 150px;
+    width: auto;
+}
