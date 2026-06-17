@@ -890,8 +890,6 @@ body{
 
 }
 
-
-
 .review-card.hidden {
     opacity: 0;
 }
@@ -932,20 +930,22 @@ body{
 }
 
 .foot-nav h4 {
-    color: #ffffff;
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    color: #f1ad46;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
 }
 
 .foot-nav{
     flex-direction: column;
     display: flex;
     width: fit-content;
-    gap: 8px;
-
+    min-width: 30px;
+    gap: 10px;
+    position: relative;
 }
 
 .foot-nav-wrapper{
@@ -954,6 +954,8 @@ body{
     justify-content: center;
     gap: 60px;
     margin-top: 30px;
+    position: relative;
+    left: 80px;
 }
 
 
@@ -964,9 +966,10 @@ body{
     font-weight: 400;
     letter-spacing: 0.3px;
     margin-bottom: 5px;
-    color: #ffe6d6;
+    color: rgba(255, 230, 214, 0.65);
     transition: transform 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
     position: relative;
+    white-space: nowrap;
     align-self: flex-start;
 }
 
@@ -981,20 +984,35 @@ body{
     left: 0;
     background: #f1ad46;
 }
+
+.foot-nav::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -30px;
+    width: 2px;
+    height: 100%;
+    background: rgba(241,173,70,.3);
+}
+
+.foot-nav:nth-child(3)::before {
+    opacity: 0;
+}
+
 .foot-nav a:hover::after{
     opacity: 0.7;
     background: #f1ad46;
 }
 
 .foot-nav a:hover{
-    transform: scale(1.05);
-    color: #f1ad46;
+    transform: translateX(2px);
+    color: #ffe6d6;
 }
 
 
 .copyright{
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 10px;
 }
 
@@ -1009,6 +1027,7 @@ body{
     font-size: 50px;
     color: #ffe6d6;
     margin: 0 0 5px 0;
+    white-space: nowrap;
 }
 
 .footer-col{
@@ -1017,7 +1036,7 @@ body{
 
 .footer-brand-p1{
     font-size: 1rem;
-    font-family: 'Dm Sans', serif;
+    font-family: 'Dm Sans', sans-serif;
     text-transform: uppercase;
     color: #f1ad46;
 }
@@ -1495,8 +1514,8 @@ input::placeholder {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    border: 0.07em solid #9f5e2d;
-    color: #9f5e2d;
+    border: 0.07em solid #f1ad46;
+    color: #2a1a12;
     font-size: 1.4rem;
     text-decoration: none;
     transition: background 0.4s, color 0.4s, transform 0.4s;
@@ -1520,21 +1539,21 @@ input::placeholder {
 }
 
 .email-send{
+    position: relative;
     display: flex;
     flex-direction: row;
     color: #ffe6d6;
     padding: 16px 20px;
     border: 1px solid rgba(241, 173, 70, 0.35);
     border-radius: 14px;
-    margin-top: 60px;
-
+    top: 70px;
 }
 
 .loop-icon{
     align-self: center;
     flex-shrink: 0;
-    width: 110px;
-    height: auto;
+    height: 150px;
+    width: auto;
     margin-right: 16px;
 }
 
@@ -1616,9 +1635,4 @@ input::placeholder {
 
 .email-form:focus-within .email-btn{
     border-color: #f1ad46;
-}
-
-.loop-icon{
-    height: 150px;
-    width: auto;
 }
