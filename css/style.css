@@ -954,8 +954,7 @@ body {
     display: flex;
     gap: 60px;
     justify-content: center;
-    left: 80px;
-    margin-right: 150px;
+
     margin-top: 30px;
     position: relative;
 }
@@ -1077,7 +1076,6 @@ body {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 20px;
 }
 
 .right-top {
