@@ -1551,6 +1551,8 @@ input::placeholder {
     margin: -10px 50px 50px;
     border: 1px solid rgba(241, 173, 70, 0.35);
     border-radius: 14px;
+    background: rgba(255, 230, 214, 0.04);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 230, 214, 0.06);
 }
 
 .loop-icon{
@@ -1590,7 +1592,7 @@ input::placeholder {
 }
 
 .email-form:focus-within{
-    box-shadow: 0 0 0 3px rgba(241, 173, 70, 0.15);
+    box-shadow: 0 0 0 3px rgba(169, 116, 63, 0.35);
 }
 
 .email-input{
@@ -1599,9 +1601,9 @@ input::placeholder {
     padding: 0.9em 1.1em;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
-    color: #ffe6d6;
-    background: rgba(255, 230, 214, 0.04);
-    border: 1px solid rgba(241, 173, 70, 0.35);
+    color: #3a2114;
+    border: 1.5px solid rgba(159, 94, 45, 0.3);
+    background: #e8d7c4;
     border-right: none;
     border-radius: 10px 0 0 10px;
     outline: none;
@@ -1612,16 +1614,16 @@ input::placeholder {
     flex-shrink: 0;
     padding: 0 1.2em;
     font-size: 1.25rem;
-    color: #2a1a12;
-    background: #d29444;
-    border: 1px solid #d29444;
+    color: #fff3e6;
+    background: #a9743f;
+    border: 1px solid #a9743f;
     border-radius: 0 10px 10px 0;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
 }
 
 .email-btn:hover{
-    background: #ffc266;
+    background: #c08a4e;
 }
 
 .email-btn:active{
@@ -1629,13 +1631,13 @@ input::placeholder {
 }
 
 .email-input::placeholder{
-    color: rgba(255, 230, 214, 0.5);
+    color: rgba(58, 33, 20, 0.5);
     letter-spacing: 0.3px;
 }
 
 .email-input:focus{
-    border-color: #f1ad46;
-    background: rgba(255, 230, 214, 0.08);
+    border-color: #9f5e2d;
+    background: #efe2d3;
 }
 
 .email-form:focus-within .email-btn{
