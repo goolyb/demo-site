@@ -952,9 +952,9 @@ body {
 .foot-nav-wrapper {
     align-items: center;
     display: flex;
-    gap: 60px;
+    flex: 1;
+    gap: 50px;
     justify-content: center;
-
     margin-top: 30px;
     position: relative;
 }
@@ -1084,6 +1084,7 @@ body {
     flex-direction: row;
     gap: 70px;
     justify-content: center;
+
 }
 
 .foot-discri {
