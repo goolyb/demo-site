@@ -52,14 +52,19 @@ function placeCard(card) {
 
 function wrapCard(card, offScreenY, landingY) {
     const info = card.querySelector('.review-info');
+    const text = card.querySelector('.review-text1');
     card.style.transform = `translateY(${offScreenY}px)`;
     card.classList.add('hidden');
     info.classList.add('hidden');
     setTimeout(function () {
         card.style.transition = 'none';
+        info.style.transition = 'none';
+        text.style.transition = 'none';
         card.style.transform = `translateY(${landingY}px)`;
         setTimeout(function () {
             card.style.transition = '';
+            info.style.transition = '';
+            text.style.transition = '';
             card.classList.remove('hidden');
             info.classList.remove('hidden');
         }, 20);
@@ -88,14 +93,14 @@ btnUp.addEventListener("click", function () {
     if (isAnimating) return;
     isAnimating = true;
     massive.forEach(myUpFunction);
-    setTimeout(() => isAnimating = false, 700);
+    setTimeout(() => isAnimating = false, 800);
 });
 
 btnDown.addEventListener("click", function () {
     if (isAnimating) return;
     isAnimating = true;
     massive.forEach(myDownFunction);
-    setTimeout(() => isAnimating = false, 700);
+    setTimeout(() => isAnimating = false, 800);
 });
 
 massive.forEach(placeCard);
