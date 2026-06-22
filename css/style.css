@@ -952,7 +952,6 @@ body {
 .foot-nav-wrapper {
     align-items: center;
     display: flex;
-    flex: 1;
     gap: 50px;
     justify-content: center;
     margin-top: 30px;
@@ -1024,8 +1023,8 @@ body {
 .footer-brand h2 {
     color: #ffe6d6;
     font-family: "Playfair Display", serif;
-    font-size: 50px;
-    margin: 0 0 5px 0;
+    font-size: 60px;
+    margin: -35px 0 5px 0;
     white-space: nowrap;
 }
 
@@ -1074,8 +1073,9 @@ body {
 .right-wrapper {
     align-items: stretch;
     display: flex;
-    flex: 1;
     flex-direction: column;
+    margin-right: 40px;
+    margin-top: 20px;
 }
 
 .right-top {
@@ -1084,7 +1084,6 @@ body {
     flex-direction: row;
     gap: 70px;
     justify-content: center;
-
 }
 
 .foot-discri {
