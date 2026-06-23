@@ -746,6 +746,7 @@ body {
 .review-card {
     align-items: center;
     display: flex;
+
     height: 170px;
     position: absolute;
     transition: transform 0.8s ease, opacity 0.8s ease;
@@ -761,22 +762,42 @@ body {
     width: 130px;
 }
 
-.review-inner{
+.review-inner {
     align-items: center;
+    background: rgba(255, 243, 234, 0.45);
+    border: 1.5px solid rgba(159, 94, 45, 0.1);
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(75, 36, 12, 0.02);
+    backdrop-filter: blur(10px);
     display: flex;
-    width: fit-content;
+    padding: 20px 40px;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 1150px;
+    height: 145px;
+    box-sizing: border-box;
+    opacity: 0.35;
+    margin-left: 3%;
+}
+
+.review-inner.active {
+    background: #ffffff;
+    border-color: rgba(159, 94, 45, 0.3);
+    box-shadow: 0 15px 35px rgba(75, 36, 12, 0.08);
+    opacity: 1;
+    transform: scale(1.02);
+    margin-left: 7%;
 }
 
 .review-card .review-avatar {
     display: flex;
     opacity: 0.5;
     transform: scale(0.7);
-    margin-right: -50px;
-    margin-left: 50px;
+    margin-right: -40px;
+    margin-left: 20px;
 }
 
 .review-avatar.active {
-    margin-left: 200px;
+    margin-left: 20px;
     opacity: 1;
     transform: scale(1);
 }
@@ -793,16 +814,15 @@ body {
     font-size: 1.3rem;
     height: fit-content;
     line-height: 25px;
-    transform: scale(1.1);
+    transform: scale(1);
     transition: opacity ease 0.8s, transform ease 0.8s;
-    width: 650px;
+    width: 580px;
 }
 
 .review-text1.faded {
     display: flex;
     opacity: 0.3;
-    transform: translateX(-150px) scale(0.7);
-
+    transform: translateX(-50px) scale(0.85);
 }
 
 .avatar {
@@ -817,7 +837,7 @@ body {
     height: 170px;
     justify-content: center;
     transition: transform ease 0.8s, opacity ease 0.8s;
-    width: 400px;
+    width: 320px;
 }
 
 .reviewer-name {
@@ -892,7 +912,8 @@ body {
 
 .review-info.faded {
     opacity: 0.3;
-    transform: scale(0.7);
+    transform: scale(0.9);
+    margin-left: 30px;
 }
 
 .review-time {

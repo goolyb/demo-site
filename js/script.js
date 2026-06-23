@@ -32,13 +32,16 @@ function setActive(card) {
     const avatar = card.querySelector('.review-avatar');
     const text = card.querySelector('.review-text1');
     const info = card.querySelector('.review-info');
+    const inner = card.querySelector('.review-inner');
     if (Number(card.dataset.pos) === 1) {
         avatar.classList.add('active');
+        if (inner) inner.classList.add('active');
         text.classList.remove('faded');
         info.classList.remove('faded')
         info.classList.add('active');
     } else {
         avatar.classList.remove('active');
+        if (inner) inner.classList.remove('active');
         text.classList.add('faded');
         info.classList.remove('active')
         info.classList.add('faded')
