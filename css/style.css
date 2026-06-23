@@ -772,11 +772,12 @@ body {
     display: flex;
     padding: 20px 40px;
     transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    width: 1150px;
-    height: 145px;
+    width: 950px;
+    height: 118px;
     box-sizing: border-box;
     opacity: 0.35;
-    margin-left: 3%;
+    margin-left: 2%;
+
 }
 
 .review-inner.active {
@@ -785,7 +786,9 @@ body {
     box-shadow: 0 15px 35px rgba(75, 36, 12, 0.08);
     opacity: 1;
     transform: scale(1.02);
-    margin-left: 7%;
+    margin-left: 8%;
+    width: 1150px;
+    height: 145px;
 }
 
 .review-card .review-avatar {
@@ -823,6 +826,8 @@ body {
     display: flex;
     opacity: 0.3;
     transform: translateX(-50px) scale(0.85);
+    flex-shrink: 0;
+    font-size: 1.2rem;
 }
 
 .avatar {
@@ -901,7 +906,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 8%;
     transition: opacity 0.8s ease, transform 0.8s ease, margin-left 0.8s ease;
 }
 
@@ -914,6 +919,7 @@ body {
     opacity: 0.3;
     transform: scale(0.9);
     margin-left: 30px;
+    width: 400px;
 }
 
 .review-time {
