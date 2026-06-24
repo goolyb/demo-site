@@ -29,22 +29,11 @@ const massive = document.querySelectorAll('.review-card');
 let isAnimating = false;
 
 function setActive(card) {
-    const avatar = card.querySelector('.review-avatar');
-    const text = card.querySelector('.review-text1');
-    const info = card.querySelector('.review-info');
     const inner = card.querySelector('.review-inner');
     if (Number(card.dataset.pos) === 1) {
-        avatar.classList.add('active');
         if (inner) inner.classList.add('active');
-        text.classList.remove('faded');
-        info.classList.remove('faded')
-        info.classList.add('active');
     } else {
-        avatar.classList.remove('active');
         if (inner) inner.classList.remove('active');
-        text.classList.add('faded');
-        info.classList.remove('active')
-        info.classList.add('faded')
     }
 }
 
@@ -54,22 +43,14 @@ function placeCard(card) {
 }
 
 function wrapCard(card, offScreenY, landingY) {
-    const info = card.querySelector('.review-info');
-    const text = card.querySelector('.review-text1');
     card.style.transform = `translateY(${offScreenY}px)`;
     card.classList.add('hidden');
-    info.classList.add('hidden');
     setTimeout(function () {
         card.style.transition = 'none';
-        info.style.transition = 'none';
-        text.style.transition = 'none';
         card.style.transform = `translateY(${landingY}px)`;
         setTimeout(function () {
             card.style.transition = '';
-            info.style.transition = '';
-            text.style.transition = '';
             card.classList.remove('hidden');
-            info.classList.remove('hidden');
         }, 20);
     }, 400);
 }
