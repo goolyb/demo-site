@@ -1655,3 +1655,23 @@ input::placeholder {
 .email-form:focus-within .email-btn {
     border-color: #f1ad46;
 }
+
+
+
+.footer-heart-wrap {
+    align-items: center;
+    align-self: stretch;
+    color: rgb(250 182 54 / 0.87);
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding: 0 50px;
+}
+
+.footer-heart-wrap::before,
+.footer-heart-wrap::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: rgb(250 182 54 / 0.66);
+}
