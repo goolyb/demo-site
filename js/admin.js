@@ -42,7 +42,7 @@ async function loadCategories() {
     $("cat-list").innerHTML = data.map(c => `
         <div class="cat-row" draggable="true" data-id="${c.id}">
             <span class="drag-handle">⠿</span>
-            ${c.image_url ? `<img src="${c.image_url}" style="max-width:80px;">` : "(нет фото)"}
+            ${c.image_url ? `<img src="${c.image_url}" style="max-width:80px;">` : "(no photo)"}
             <b>${c.name}</b>
             <input type="file" accept="image/*" onchange="uploadCatPhoto(${c.id}, this)">
             <button onclick="renameCat(${c.id})"><i class="fa-solid fa-pencil"></i></button>
@@ -88,13 +88,13 @@ window.uploadCatPhoto = async (catId, input) => {
         if (error) throw error;
         await loadCategories();
     } catch (e) {
-        alert("Ошибка: " + e.message);
+        alert("Error: " + e.message);
     }
 };
 
 window.renameCat = async (catId) => {
     const cat = window._cats.find(c => c.id === catId);
-    const name = prompt("Новое название категории:", cat.name);
+    const name = prompt("New category name:", cat.name);
     if (!name || !name.trim()) return;
     const { error } = await db.from("categories")
         .update({ name: name.trim() }).eq("id", catId);
@@ -103,7 +103,7 @@ window.renameCat = async (catId) => {
 };
 
 window.deleteCat = async (catId) => {
-    if (!confirm("Удалить категорию? Все блюда в ней тоже удалятся!")) return;
+    if (!confirm("Delete this category? All items in it will be deleted too!")) return;
     const { error } = await db.from("categories").delete().eq("id", catId);
     if (error) { alert(error.message); return; }
     await loadCategories();
@@ -124,15 +124,33 @@ $("add-cat-btn").onclick = async () => {
 async function loadItems() {
     const { data, error } = await db.from("menu_items").select("*").order("sort_order");
     if (error) { $("items-list").textContent = error.message; return; }
+    window._items = data;
+    const catOptions = (window._cats || []).map(c => `<option value="${c.id}">${c.name}</option>`).join("");
     $("items-list").innerHTML = data.map(i => `
-        <div>
-            ${i.image_url ? `<img src="${i.image_url}" style="max-width:60px;">` : ""}
-            <b>${i.name}</b> — € ${Number(i.price).toFixed(2)}
-            <button onclick="editItem(${i.id})"><i class="fa-solid fa-pencil"></i></button>
-            <button onclick="deleteItem(${i.id})"><i class="fa-solid fa-trash-can"></i></button>
+        <div class="item-card">
+            <div class="item-row">
+                <b>${i.name}</b> — € ${Number(i.price).toFixed(2)}
+                <span class="item-actions">
+                    <button onclick="editItem(${i.id})"><i class="fa-solid fa-pencil"></i></button>
+                    <button onclick="deleteItem(${i.id})"><i class="fa-solid fa-trash-can"></i></button>
+                </span>
+            </div>
+            <div class="item-edit" id="edit-${i.id}">
+                <div class="item-edit-inner">
+                    <input class="e-name" type="text" placeholder="Name" value="${i.name}">
+                    <select class="e-cat">${catOptions}</select>
+                    <input class="e-price" type="number" step="0.01" placeholder="Price" value="${i.price}">
+                    <input class="e-desc" type="text" placeholder="Description" value="${i.description || ""}">
+                    <input class="e-badge" type="text" placeholder="Badge (optional)" value="${i.badge || ""}">
+                    <div class="item-edit-btns">
+                        <button onclick="saveItem(${i.id})">Save</button>
+                        <button class="btn-ghost" onclick="editItem(${i.id})">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     `).join("");
-    window._items = data;
+    data.forEach(i => { $("edit-" + i.id).querySelector(".e-cat").value = i.category_id; });
 }
 
 async function uploadPhoto(file) {
@@ -145,7 +163,7 @@ async function uploadPhoto(file) {
 }
 
 $("save-btn").onclick = async () => {
-    $("form-msg").textContent = "Сохраняю...";
+    $("form-msg").textContent = "Saving...";
     try {
         let imageUrl = window._editingImage || null;
         const file = $("f-image").files[0];
@@ -167,34 +185,33 @@ $("save-btn").onclick = async () => {
         if (error) throw error;
         resetForm();
         await loadItems();
-        $("form-msg").textContent = "Готово ✅";
+        $("form-msg").textContent = "Done ✅";
     } catch (e) {
-        $("form-msg").textContent = "Ошибка: " + e.message;
+        $("form-msg").textContent = "Error: " + e.message;
     }
 };
 
-window.editItem = async (id) => {
-    const item = window._items.find(i => i.id === id);
+window.editItem = (id) => {
+    $("edit-" + id).classList.toggle("open");
+};
 
-    const name = prompt("Название:", item.name);
-    if (name === null) return;
-    const priceStr = prompt("Цена:", item.price);
-    if (priceStr === null) return;
-    const description = prompt("Описание:", item.description || "");
-    if (description === null) return;
-
+window.saveItem = async (id) => {
+    const panel = $("edit-" + id);
     const { error } = await db.from("menu_items").update({
-        name: name.trim(),
-        price: Number(priceStr),
-        description: description.trim() || null,
+        name: panel.querySelector(".e-name").value.trim(),
+        category_id: Number(panel.querySelector(".e-cat").value),
+        price: Number(panel.querySelector(".e-price").value),
+        description: panel.querySelector(".e-desc").value.trim() || null,
+        badge: panel.querySelector(".e-badge").value.trim() || null,
     }).eq("id", id);
 
     if (error) { alert(error.message); return; }
-    await loadItems();
+    panel.classList.remove("open");
+    setTimeout(loadItems, 300);
 };
 
 window.deleteItem = async (id) => {
-    if (!confirm("Удалить позицию?")) return;
+    if (!confirm("Delete this item?")) return;
     const { error } = await db.from("menu_items").delete().eq("id", id);
     if (error) alert(error.message);
     else loadItems();
@@ -203,7 +220,7 @@ window.deleteItem = async (id) => {
 $("cancel-btn").onclick = resetForm;
 
 function resetForm() {
-    $("form-title").textContent = "Новое блюдо";
+    $("form-title").textContent = "New item";
     $("f-id").value = "";
     $("f-name").value = "";
     $("f-description").value = "";

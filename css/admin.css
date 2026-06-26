@@ -139,23 +139,24 @@ button:hover { opacity: 0.85; }
     margin-bottom: 24px;
 }
 
-#items-list > div {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
+.item-card {
     margin-bottom: 8px;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 10px;
+    overflow: hidden;
 }
 
-#items-list b { flex: 1; }
-
-#items-list img {
-    border-radius: 6px;
-    object-fit: cover;
+.item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
 }
+
+.item-row b { flex: 1; }
+
+.item-actions { display: flex; gap: 6px; }
 
 #items-list button {
     padding: 6px 10px;
@@ -164,6 +165,29 @@ button:hover { opacity: 0.85; }
     color: var(--brown);
     font-size: 0.95rem;
 }
+
+.item-edit {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.item-edit.open { max-height: 420px; }
+
+.item-edit-inner {
+    padding: 14px 12px;
+    border-top: 1px solid var(--line);
+    background: var(--cream);
+}
+
+.item-edit-btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.item-edit-btns button { background: var(--brown); color: #fff; }
+.item-edit-btns .btn-ghost { background: transparent; }
 
 #form-msg { margin: 10px 0 0; font-weight: 700; }
 #login-error { margin: 8px 0 0; }
