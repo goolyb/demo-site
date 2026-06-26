@@ -25,16 +25,25 @@ async function loadMenu() {
 
     root.innerHTML = categories.map(cat => `
         <section class="menu-category">
-            <h2>${cat.name}</h2>
-            <div class="menu-items">
-                ${items.filter(i => i.category_id === cat.id).map(i => `
-                    <div class="menu-item">
-                        ${i.image_url ? `<img src="${i.image_url}" alt="${i.name}">` : ""}
-                        <div class="menu-item-name">${i.name}${i.badge ? ` <span class="badge">${i.badge}</span>` : ""}</div>
-                        ${i.description ? `<div class="menu-item-desc">${i.description}</div>` : ""}
-                        <div class="menu-item-price">€ ${Number(i.price).toFixed(2)}</div>
-                    </div>
-                `).join("")}
+            ${cat.image_url ? `
+                <div class="cat-photo">
+                    <img src="${cat.image_url}" alt="${cat.name}">
+                </div>` : ""}
+            <div class="cat-body">
+                <h2 class="cat-title">${cat.name}</h2>
+                <div class="cat-items">
+                    ${items.filter(i => i.category_id === cat.id).map(i => `
+                        <div class="menu-item">
+                            <div class="menu-item-row">
+                                <span class="menu-item-name">${i.name}</span>
+                                ${i.badge ? `<span class="badge">${i.badge}</span>` : ""}
+                                <span class="leader"></span>
+                                <span class="menu-item-price">€ ${Number(i.price).toFixed(2)}</span>
+                            </div>
+                            ${i.description ? `<p class="menu-item-desc">${i.description}</p>` : ""}
+                        </div>
+                    `).join("")}
+                </div>
             </div>
         </section>
     `).join("");

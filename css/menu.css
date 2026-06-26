@@ -1,52 +1,137 @@
+:root {
+    --brown: #4b240c;
+    --gold: #b8860b;
+    --gold-badge: #f1ad46;
+    --cream: #f7f1e6;
+    --muted: #8a7a68;
+    --photo-w: 340px;
+    --photo-h: 400px;
+}
+
+body {
+    background: var(--cream);
+    color: var(--brown);
+    margin: 0;
+    padding: 0 0 80px;
+}
+
 .menu-title {
     text-align: center;
-    margin: 40px 0;
+    font-family: "Fraunces", serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin: 50px 0 6px;
+}
+
+.menu-subtitle {
+    text-align: center;
+    font-family: "Caveat", cursive;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin: 0 0 50px;
 }
 
 .menu-category {
-    max-width: 900px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    max-width: 1000px;
+    margin: 0 auto 64px;
+    padding: 0 24px;
 }
 
-.menu-category h2 {
-    border-bottom: 2px solid #4b240c;
-    padding-bottom: 8px;
+.menu-category:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.cat-photo {
+    flex: 0 0 var(--photo-w);
+}
+
+.cat-photo img {
+    width: var(--photo-w);
+    height: var(--photo-h);
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.cat-body {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.cat-title {
+    font-family: "Fraunces", serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--brown);
+}
+
+.menu-item {
     margin-bottom: 20px;
 }
 
-.menu-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 24px;
-}
-
-.menu-item img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 8px;
+.menu-item-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
 }
 
 .menu-item-name {
+    font-family: "Fraunces", serif;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin-top: 8px;
+    white-space: nowrap;
 }
 
-.menu-item-desc {
-    font-size: 0.9rem;
-    color: #666;
+.leader {
+    flex: 1 1 auto;
+    border-bottom: 2px dotted var(--muted);
+    transform: translateY(-4px);
 }
 
 .menu-item-price {
-    margin-top: 4px;
-    font-weight: 700;
+    font-family: "Fraunces", serif;
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+.menu-item-desc {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 2px 0 0;
 }
 
 .badge {
+    font-family: "Nunito", sans-serif;
     font-size: 0.7rem;
-    background: #f1ad46;
-    color: #4b240c;
-    padding: 2px 8px;
-    border-radius: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--gold-badge);
+    color: var(--brown);
+    padding: 2px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    align-self: center;
+}
+
+@media (max-width: 760px) {
+    .menu-category,
+    .menu-category:nth-child(even) {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .cat-photo,
+    .cat-photo img {
+        width: 100%;
+        flex-basis: auto;
+    }
+    .menu-title { font-size: 2.5rem; }
 }
