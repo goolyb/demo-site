@@ -232,6 +232,7 @@ body {
 }
 
 .menu-btn {
+    display: flex;
     background: #9f5e2d;
     border: none;
     border-radius: 8px;
@@ -247,6 +248,9 @@ body {
     text-transform: uppercase;
     transition: transform 0.4s;
     width: 170px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .menu-btn:hover {
@@ -1342,6 +1346,7 @@ body {
 
 .info-group1 {
     align-items: center;
+    color: #4b240c;
     display: flex;
     font-size: 42px;
     justify-content: center;
