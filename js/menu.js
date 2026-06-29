@@ -15,7 +15,8 @@ async function loadMenu() {
         .from("menu_items")
         .select("*")
         .eq("is_available", true)
-        .order("sort_order");
+        .order("sort_order")
+        .order("id");
 
     if (catErr || itemErr) {
         root.textContent = "Failed to load menu :(";

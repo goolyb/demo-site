@@ -123,7 +123,7 @@ $("add-cat-btn").onclick = async () => {
 };
 
 async function loadItems() {
-    const { data, error } = await db.from("menu_items").select("*").order("sort_order");
+    const { data, error } = await db.from("menu_items").select("*").order("sort_order").order("id");
     if (error) { $("items-list").textContent = error.message; return; }
     window._items = data;
     const catOptions = (window._cats || []).map(c => `<option value="${c.id}">${c.name}</option>`).join("");
