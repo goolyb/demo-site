@@ -13,7 +13,7 @@
     --accent: #b87514;
     --accent-soft: #f1ad46;
 
-    --line: #e3d8c6;
+    --line: #b6afa6;
 }
 
 * { box-sizing: border-box; }
@@ -77,6 +77,39 @@ select {
     color: var(--ink);
 }
 
+.badge-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.badge-row input[type="text"] {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+input[type="color"] {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-card);
+    cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+}
+input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: 5px;
+}
+
 input:focus,
 select:focus {
     outline: none;
@@ -131,6 +164,21 @@ button:hover { opacity: 0.85; }
 
 .cat-row:hover { border-color: var(--accent); }
 
+.cat-row.dragging,
+.item-card.dragging { opacity: 0.45; }
+
+.cat-row.drag-over,
+.item-card.drag-over {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgb(184 117 20 / 0.35);
+}
+
+.item-group.drag-over {
+    outline: 2px dashed var(--accent);
+    outline-offset: 4px;
+    border-radius: 10px;
+}
+
 .cat-row img {
     border-radius: 6px;
     object-fit: cover;
@@ -165,10 +213,42 @@ button:hover { opacity: 0.85; }
 
 #form-box {
     background: var(--surface-page);
-    border: 1px solid var(--line);
+    border: 1px solid #e0d3bd;
+    border-left: 4px solid var(--accent);
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgb(75 38 12 / 0.08);
+}
+
+.item-group { margin-bottom: 22px; }
+
+.item-group-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Fraunces", serif;
+    font-size: 1.1rem;
+    color: var(--ink-strong);
+    margin: 0 0 10px;
+}
+
+.item-group-count {
+    font-family: "Nunito", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    background: var(--surface-page);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 1px 8px;
+}
+
+.item-group-empty {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0 0 4px;
 }
 
 .item-card {

@@ -12,6 +12,7 @@ create table menu_items (
   price        numeric(10,2) not null,
   image_url    text,
   badge        text,
+  badge_color  text,
   is_available boolean not null default true,
   sort_order   int     not null default 0
 );

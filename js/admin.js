@@ -57,10 +57,13 @@ let _dragId = null;
 
 function enableCatDnd() {
     $("cat-list").querySelectorAll(".cat-row").forEach(row => {
-        row.ondragstart = () => { _dragId = Number(row.dataset.id); };
-        row.ondragover = (e) => e.preventDefault();
+        row.ondragstart = () => { _dragId = Number(row.dataset.id); row.classList.add("dragging"); };
+        row.ondragend = () => row.classList.remove("dragging");
+        row.ondragover = (e) => { e.preventDefault(); row.classList.add("drag-over"); };
+        row.ondragleave = () => row.classList.remove("drag-over");
         row.ondrop = (e) => {
             e.preventDefault();
+            row.classList.remove("drag-over");
             reorderCats(_dragId, Number(row.dataset.id));
         };
     });
@@ -126,10 +129,13 @@ async function loadItems() {
     const { data, error } = await db.from("menu_items").select("*").order("sort_order").order("id");
     if (error) { $("items-list").textContent = error.message; return; }
     window._items = data;
-    const catOptions = (window._cats || []).map(c => `<option value="${c.id}">${c.name}</option>`).join("");
-    $("items-list").innerHTML = data.map(i => `
-        <div class="item-card${i.is_available ? "" : " is-hidden"}">
+    const cats = window._cats || [];
+    const catOptions = cats.map(c => `<option value="${c.id}">${c.name}</option>`).join("");
+
+    const renderCard = (i) => `
+        <div class="item-card${i.is_available ? "" : " is-hidden"}" data-id="${i.id}" data-cat="${i.category_id}">
             <div class="item-row">
+                <span class="drag-handle" title="Drag to reorder">⠿</span>
                 <b>${i.name}</b> — € ${Number(i.price).toFixed(2)}
                 ${i.is_available ? "" : `<span class="hidden-tag">hidden</span>`}
                 <span class="item-actions">
@@ -146,9 +152,12 @@ async function loadItems() {
                     <select class="e-cat">${catOptions}</select>
                     <input class="e-price" type="number" step="0.10" placeholder="Price" value="${i.price}">
                     <input class="e-desc" type="text" placeholder="Description" value="${i.description || ""}">
-                    <input class="e-badge" type="text" placeholder="Badge (optional)" value="${i.badge || ""}">
+                    <div class="badge-row">
+                        <input class="e-badge" type="text" placeholder="Badge (optional)" value="${i.badge || ""}">
+                        <input class="e-badge-color" type="color" value="${i.badge_color || "#f1ad46"}" title="Badge color">
+                    </div>
                     ${i.image_url ? `<img class="e-preview" src="${i.image_url}">` : ""}
-                   
+
                     <div class="item-edit-btns">
                         <input class="e-image" type="file" accept="image/*">
                         <button onclick="saveItem(${i.id})">Save</button>
@@ -156,9 +165,84 @@ async function loadItems() {
                     </div>
                 </div>
             </div>
-        </div>
-    `).join("");
+        </div>`;
+
+    const renderGroup = (title, items, catId) => `
+        <div class="item-group" data-cat="${catId}">
+            <h3 class="item-group-title">${title} <span class="item-group-count">${items.length}</span></h3>
+            ${items.length ? items.map(renderCard).join("") : `<p class="item-group-empty">No items yet</p>`}
+        </div>`;
+
+    let html = cats.map(c => renderGroup(c.name, data.filter(i => i.category_id === c.id), c.id)).join("");
+    const orphans = data.filter(i => !cats.some(c => c.id === i.category_id));
+    if (orphans.length) html += renderGroup("Uncategorized", orphans, "");
+
+    $("items-list").innerHTML = html;
     data.forEach(i => { $("edit-" + i.id).querySelector(".e-cat").value = i.category_id; });
+    enableItemDnd();
+}
+
+let _dragItemId = null;
+
+function enableItemDnd() {
+    $("items-list").querySelectorAll(".item-card").forEach(card => {
+        const handle = card.querySelector(".drag-handle");
+        handle.draggable = true;
+        handle.ondragstart = (e) => {
+            _dragItemId = Number(card.dataset.id);
+            e.dataTransfer.effectAllowed = "move";
+            card.classList.add("dragging");
+        };
+        handle.ondragend = () => card.classList.remove("dragging");
+        card.ondragover = (e) => { e.preventDefault(); e.stopPropagation(); card.classList.add("drag-over"); };
+        card.ondragleave = () => card.classList.remove("drag-over");
+        card.ondrop = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            card.classList.remove("drag-over");
+            dropOnItem(Number(card.dataset.id), Number(card.dataset.cat));
+        };
+    });
+    $("items-list").querySelectorAll(".item-group").forEach(group => {
+        group.ondragover = (e) => { e.preventDefault(); group.classList.add("drag-over"); };
+        group.ondragleave = () => group.classList.remove("drag-over");
+        group.ondrop = (e) => {
+            e.preventDefault();
+            group.classList.remove("drag-over");
+            const cat = group.dataset.cat;
+            if (cat) dropOnGroup(Number(cat));
+        };
+    });
+}
+
+async function dropOnItem(targetId, targetCat) {
+    if (!_dragItemId || _dragItemId === targetId) return;
+    const items = window._items;
+    const moved = items.splice(items.findIndex(i => i.id === _dragItemId), 1)[0];
+    moved.category_id = targetCat;
+    items.splice(items.findIndex(i => i.id === targetId), 0, moved);
+    await persistItemOrder();
+}
+
+async function dropOnGroup(catId) {
+    if (!_dragItemId) return;
+    const items = window._items;
+    const moved = items.splice(items.findIndex(i => i.id === _dragItemId), 1)[0];
+    moved.category_id = catId;
+    let lastIdx = -1;
+    items.forEach((it, idx) => { if (it.category_id === catId) lastIdx = idx; });
+    items.splice(lastIdx + 1, 0, moved);
+    await persistItemOrder();
+}
+
+async function persistItemOrder() {
+    for (let i = 0; i < window._items.length; i++) {
+        const it = window._items[i];
+        await db.from("menu_items")
+            .update({ sort_order: i + 1, category_id: it.category_id })
+            .eq("id", it.id);
+    }
+    await loadItems();
 }
 
 async function uploadPhoto(file) {
@@ -182,6 +266,7 @@ $("save-btn").onclick = async () => {
             name: $("f-name").value,
             description: $("f-description").value || null,
             badge: $("f-badge").value.trim() || null,
+            badge_color: $("f-badge").value.trim() ? $("f-badge-color").value : null,
             price: Number($("f-price").value),
             image_url: imageUrl,
         };
@@ -212,6 +297,8 @@ window.saveItem = async (id) => {
         price: Number(panel.querySelector(".e-price").value),
         description: panel.querySelector(".e-desc").value.trim() || null,
         badge: panel.querySelector(".e-badge").value.trim() || null,
+        badge_color: panel.querySelector(".e-badge").value.trim()
+            ? panel.querySelector(".e-badge-color").value : null,
     };
     try {
         const file = panel.querySelector(".e-image").files[0];
@@ -252,6 +339,7 @@ function resetForm() {
     $("f-name").value = "";
     $("f-description").value = "";
     $("f-badge").value = "";
+    $("f-badge-color").value = "#f1ad46";
     $("f-price").value = "";
     $("f-image").value = "";
     $("f-filename").textContent = "No file chosen";

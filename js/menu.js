@@ -3,6 +3,17 @@ const SUPABASE_KEY = "sb_publishable_4I03VtIyHTUlzkbJ5AlndQ_tbHrhue5";
 
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+function badgeStyle(color) {
+    if (!color) return "";
+    const hex = color.replace("#", "");
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4, 6), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    const text = luminance > 0.6 ? "#3a1c08" : "#fff";
+    return `background:${color};color:${text};`;
+}
+
 async function loadMenu() {
     const root = document.getElementById("menu-root");
 
@@ -37,7 +48,7 @@ async function loadMenu() {
                         <div class="menu-item">
                             <div class="menu-item-row">
                                 <span class="menu-item-name">${i.name}</span>
-                                ${i.badge ? `<span class="badge">${i.badge}</span>` : ""}
+                                ${i.badge ? `<span class="badge" style="${badgeStyle(i.badge_color)}">${i.badge}</span>` : ""}
                                 <span class="leader"></span>
                                 <span class="menu-item-price">€ ${Number(i.price).toFixed(2)}</span>
                             </div>
