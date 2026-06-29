@@ -1,9 +1,19 @@
 :root {
-    --brown: #4b240c;
-    --gold: #f1ad46;
-    --cream: #f7f1e6;
+    /* surfaces — page → panel → card */
+    --surface-page: #f7f1e6;
+    --surface-panel: #fbf7ef;
+    --surface-card: #ffffff;
+
+    /* ink — heading → body → meta */
+    --ink-strong: #3a1c08;
+    --ink: #4b240c;
+    --ink-soft: #8a7a68;
+
+    /* accent — interaction & highlight */
+    --accent: #b87514;
+    --accent-soft: #f1ad46;
+
     --line: #e3d8c6;
-    --muted: #8a7a68;
 }
 
 * { box-sizing: border-box; }
@@ -11,8 +21,8 @@
 body {
     margin: 0;
     padding: 40px 20px;
-    background: var(--cream);
-    color: var(--brown);
+    background: var(--surface-page);
+    color: var(--ink);
     font-family: "Nunito", system-ui, sans-serif;
     line-height: 1.5;
 }
@@ -21,25 +31,34 @@ body {
 #admin-box {
     max-width: 720px;
     margin: 0 auto;
-    background: #fff;
+    background: var(--surface-card);
     border: 1px solid var(--line);
     border-radius: 14px;
     padding: 28px;
     box-shadow: 0 6px 24px rgb(75 38 12 / 0.06);
 }
 
+h1 {
+    font-family: "Fraunces", serif;
+    font-size: 2rem;
+    color: var(--ink-strong);
+    margin: 0 0 24px;
+}
+
 h2 {
     font-family: "Fraunces", serif;
     font-size: 1.5rem;
+    color: var(--ink-strong);
     margin: 28px 0 14px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--brown);
+    border-bottom: 2px solid var(--ink);
 }
 
 h2:first-of-type { margin-top: 0; }
 
 h3 {
     font-family: "Fraunces", serif;
+    color: var(--ink-strong);
     margin: 0 0 14px;
 }
 
@@ -54,14 +73,14 @@ select {
     border: 1px solid var(--line);
     border-radius: 8px;
     font: inherit;
-    background: #fff;
-    color: var(--brown);
+    background: var(--surface-card);
+    color: var(--ink);
 }
 
 input:focus,
 select:focus {
     outline: none;
-    border-color: var(--gold);
+    border-color: var(--accent);
     box-shadow: 0 0 0 3px rgb(241 173 70 / 0.25);
 }
 
@@ -71,18 +90,30 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 8px;
-    padding: 9px 16px;
-    background: var(--brown);
-    color: #fff;
+    padding: 6px 12px;
+    background: var(--ink);
+    color: var(--surface-card);
     transition: opacity 0.15s ease;
 }
 
 button:hover { opacity: 0.85; }
 
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.back-link:hover { color: var(--accent); }
+
 #logout-btn {
     float: right;
     background: transparent;
-    color: var(--muted);
+    color: var(--ink-soft);
     border: 1px solid var(--line);
     padding: 6px 12px;
 }
@@ -93,12 +124,12 @@ button:hover { opacity: 0.85; }
     gap: 12px;
     padding: 10px 12px;
     margin-bottom: 8px;
-    background: #fff;
+    background: var(--surface-card);
     border: 1px solid var(--line);
     border-radius: 10px;
 }
 
-.cat-row:hover { border-color: var(--gold); }
+.cat-row:hover { border-color: var(--accent); }
 
 .cat-row img {
     border-radius: 6px;
@@ -109,7 +140,7 @@ button:hover { opacity: 0.85; }
 
 .drag-handle {
     cursor: grab;
-    color: var(--muted);
+    color: var(--ink-soft);
     font-size: 1.2rem;
     user-select: none;
 }
@@ -118,7 +149,7 @@ button:hover { opacity: 0.85; }
     padding: 6px 10px;
     background: transparent;
     border: 1px solid var(--line);
-    color: var(--brown);
+    color: var(--ink);
     font-size: 0.95rem;
 }
 
@@ -128,11 +159,12 @@ button:hover { opacity: 0.85; }
     font-size: 0.85rem;
 }
 
+#cat-add { margin-top: 12px; }
 #cat-name { max-width: 320px; display: inline-block; }
 #add-cat-btn { margin-left: 8px; }
 
 #form-box {
-    background: var(--cream);
+    background: var(--surface-page);
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 20px;
@@ -141,7 +173,7 @@ button:hover { opacity: 0.85; }
 
 .item-card {
     margin-bottom: 8px;
-    background: #fff;
+    background: var(--surface-card);
     border: 1px solid var(--line);
     border-radius: 10px;
     overflow: hidden;
@@ -162,7 +194,7 @@ button:hover { opacity: 0.85; }
     padding: 6px 10px;
     background: transparent;
     border: 1px solid var(--line);
-    color: var(--brown);
+    color: var(--ink);
     font-size: 0.95rem;
 }
 
@@ -172,22 +204,110 @@ button:hover { opacity: 0.85; }
     transition: max-height 0.3s ease;
 }
 
-.item-edit.open { max-height: 420px; }
+.item-edit.open { max-height: 640px; }
+
+.item-card.is-hidden { opacity: 0.6; }
+
+.hidden-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 2px 6px;
+}
+
+.e-preview {
+    max-width: 120px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+}
 
 .item-edit-inner {
     padding: 14px 12px;
     border-top: 1px solid var(--line);
-    background: var(--cream);
+    background: var(--surface-page);
 }
 
 .item-edit-btns {
     display: flex;
     gap: 8px;
     margin-top: 4px;
+
 }
 
-.item-edit-btns button { background: var(--brown); color: #fff; }
+.item-edit-btns button { background: var(--ink); color: var(--surface-card); }
 .item-edit-btns .btn-ghost { background: transparent; }
 
-#form-msg { margin: 10px 0 0; font-weight: 700; }
+.file-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.file-btn {
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 6px 12px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    white-space: nowrap;
+    transition: border-color 0.15s ease;
+}
+
+.file-btn:hover { border-color: var(--accent); }
+
+.file-name {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+}
+
+.form-btns {
+    display: flex;
+    gap: 8px;
+}
+
+#cancel-btn {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+}
+
+#form-msg {
+    margin: 10px 6px 0;
+    font-weight: 700;
+    color: rgb(0 128 0 / 0.68);
+}
+
 #login-error { margin: 8px 0 0; }
+
+input[type="file"] {
+    font: inherit;
+    color: var(--ink-soft);
+    width: fit-content;
+}
+
+input[type="file"]::file-selector-button {
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 8px;
+    margin-right: 10px;
+    background: var(--ink);
+    color: var(--surface-card);
+    transition: opacity 0.15s ease;
+}
+
+input[type="file"]::file-selector-button:hover { opacity: 0.85; }

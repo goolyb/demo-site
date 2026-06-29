@@ -44,7 +44,8 @@ async function loadCategories() {
             <span class="drag-handle">⠿</span>
             ${c.image_url ? `<img src="${c.image_url}" style="max-width:80px;">` : "(no photo)"}
             <b>${c.name}</b>
-            <input type="file" accept="image/*" onchange="uploadCatPhoto(${c.id}, this)">
+            <label class="file-btn" for="cat-file-${c.id}">Photo</label>
+            <input id="cat-file-${c.id}" type="file" accept="image/*" hidden onchange="uploadCatPhoto(${c.id}, this)">
             <button onclick="renameCat(${c.id})"><i class="fa-solid fa-pencil"></i></button>
             <button onclick="deleteCat(${c.id})"><i class="fa-solid fa-trash-can"></i></button>
         </div>
@@ -127,10 +128,14 @@ async function loadItems() {
     window._items = data;
     const catOptions = (window._cats || []).map(c => `<option value="${c.id}">${c.name}</option>`).join("");
     $("items-list").innerHTML = data.map(i => `
-        <div class="item-card">
+        <div class="item-card${i.is_available ? "" : " is-hidden"}">
             <div class="item-row">
                 <b>${i.name}</b> — € ${Number(i.price).toFixed(2)}
+                ${i.is_available ? "" : `<span class="hidden-tag">hidden</span>`}
                 <span class="item-actions">
+                    <button onclick="toggleAvailable(${i.id})" title="Show / hide">
+                        <i class="fa-solid ${i.is_available ? "fa-eye" : "fa-eye-slash"}"></i>
+                    </button>
                     <button onclick="editItem(${i.id})"><i class="fa-solid fa-pencil"></i></button>
                     <button onclick="deleteItem(${i.id})"><i class="fa-solid fa-trash-can"></i></button>
                 </span>
@@ -139,10 +144,13 @@ async function loadItems() {
                 <div class="item-edit-inner">
                     <input class="e-name" type="text" placeholder="Name" value="${i.name}">
                     <select class="e-cat">${catOptions}</select>
-                    <input class="e-price" type="number" step="0.01" placeholder="Price" value="${i.price}">
+                    <input class="e-price" type="number" step="0.10" placeholder="Price" value="${i.price}">
                     <input class="e-desc" type="text" placeholder="Description" value="${i.description || ""}">
                     <input class="e-badge" type="text" placeholder="Badge (optional)" value="${i.badge || ""}">
+                    ${i.image_url ? `<img class="e-preview" src="${i.image_url}">` : ""}
+                   
                     <div class="item-edit-btns">
+                        <input class="e-image" type="file" accept="image/*">
                         <button onclick="saveItem(${i.id})">Save</button>
                         <button class="btn-ghost" onclick="editItem(${i.id})">Cancel</button>
                     </div>
@@ -173,6 +181,7 @@ $("save-btn").onclick = async () => {
             category_id: Number($("f-category").value),
             name: $("f-name").value,
             description: $("f-description").value || null,
+            badge: $("f-badge").value.trim() || null,
             price: Number($("f-price").value),
             image_url: imageUrl,
         };
@@ -185,7 +194,7 @@ $("save-btn").onclick = async () => {
         if (error) throw error;
         resetForm();
         await loadItems();
-        $("form-msg").textContent = "Done ✅";
+        $("form-msg").textContent = "Done " + String.fromCharCode(0x2713);
     } catch (e) {
         $("form-msg").textContent = "Error: " + e.message;
     }
@@ -197,17 +206,30 @@ window.editItem = (id) => {
 
 window.saveItem = async (id) => {
     const panel = $("edit-" + id);
-    const { error } = await db.from("menu_items").update({
+    const payload = {
         name: panel.querySelector(".e-name").value.trim(),
         category_id: Number(panel.querySelector(".e-cat").value),
         price: Number(panel.querySelector(".e-price").value),
         description: panel.querySelector(".e-desc").value.trim() || null,
         badge: panel.querySelector(".e-badge").value.trim() || null,
-    }).eq("id", id);
+    };
+    try {
+        const file = panel.querySelector(".e-image").files[0];
+        if (file) payload.image_url = await uploadPhoto(file);
+        const { error } = await db.from("menu_items").update(payload).eq("id", id);
+        if (error) throw error;
+    } catch (e) { alert(e.message); return; }
 
-    if (error) { alert(error.message); return; }
     panel.classList.remove("open");
     setTimeout(loadItems, 300);
+};
+
+window.toggleAvailable = async (id) => {
+    const item = (window._items || []).find(i => i.id === id);
+    const { error } = await db.from("menu_items")
+        .update({ is_available: !item.is_available }).eq("id", id);
+    if (error) { alert(error.message); return; }
+    await loadItems();
 };
 
 window.deleteItem = async (id) => {
@@ -217,6 +239,11 @@ window.deleteItem = async (id) => {
     else loadItems();
 };
 
+$("f-image").onchange = () => {
+    const file = $("f-image").files[0];
+    $("f-filename").textContent = file ? file.name : "No file chosen";
+};
+
 $("cancel-btn").onclick = resetForm;
 
 function resetForm() {
@@ -224,8 +251,10 @@ function resetForm() {
     $("f-id").value = "";
     $("f-name").value = "";
     $("f-description").value = "";
+    $("f-badge").value = "";
     $("f-price").value = "";
     $("f-image").value = "";
+    $("f-filename").textContent = "No file chosen";
     $("f-preview").style.display = "none";
     window._editingImage = null;
     $("cancel-btn").style.display = "none";

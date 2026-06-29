@@ -135,3 +135,34 @@ body {
     }
     .menu-title { font-size: 2.5rem; }
 }
+
+
+.login-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-family: "Nunito", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cream);
+    background: var(--brown);
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(75, 36, 12, 0.25);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.login-btn:hover {
+    background: var(--gold);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 760px) {
+    .login-btn {
+        top: 16px;
+        right: 16px;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}

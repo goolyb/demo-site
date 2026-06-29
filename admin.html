@@ -10,6 +10,7 @@
 </head>
 <body>
     <div id="login-box">
+        <a href="menu.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to menu</a>
         <h2>Login</h2>
         <input id="email" type="email" placeholder="email">
         <input id="password" type="password" placeholder="password">
@@ -18,12 +19,18 @@
     </div>
 
     <div id="admin-box" style="display:none;">
+        <a href="menu.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to menu</a>
         <button id="logout-btn">Log out</button>
+
+        <h1>Admin — Café Franca</h1>
 
         <h2>Categories</h2>
         <div id="cat-list"></div>
+        <div id="cat-add">
             <input id="cat-name" type="text" placeholder="New category">
             <button id="add-cat-btn">Add category</button>
+        </div>
+
         <h2>Menu</h2>
 
         <div id="form-box">
@@ -32,11 +39,18 @@
             <select id="f-category"></select>
             <input id="f-name" type="text" placeholder="Name">
             <input id="f-description" type="text" placeholder="Description">
+            <input id="f-badge" type="text" placeholder="Badge (optional)">
             <input id="f-price" type="number" step="0.01" placeholder="Price">
-            <input id="f-image" type="file" accept="image/*">
             <img id="f-preview" style="max-width:100px; display:none;">
-            <button id="save-btn">Save</button>
-            <button id="cancel-btn" style="display:none;">Cancel</button>
+            <div class="file-row">
+                <label for="f-image" class="file-btn">Choose photo</label>
+                <input id="f-image" type="file" accept="image/*" hidden>
+                <span id="f-filename" class="file-name">No file chosen</span>
+                <div class="form-btns">
+                    <button id="save-btn">Save</button>
+                    <button id="cancel-btn" style="display:none;">Cancel</button>
+                </div>
+            </div>
             <p id="form-msg"></p>
         </div>
 
