@@ -8,7 +8,13 @@
     --photo-h: 400px;
 }
 
+html {
+    overflow-x: clip;
+    scroll-behavior: smooth;
+}
+
 body {
+    overflow-x: clip;
     background-color: var(--cream);
     background-image:
         radial-gradient(circle at 12% 8%, rgba(184, 134, 11, 0.10), transparent 38%),
@@ -247,6 +253,60 @@ body {
     .reveal-right {
         transition: none;
     }
+}
+
+.menu-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 50px auto 0;
+    padding: 0 24px;
+}
+
+.page-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+    color: var(--brown);
+    background: transparent;
+    border: 2px solid rgba(75, 36, 12, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s, opacity 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+    background: var(--brown);
+    color: var(--cream);
+    transform: scale(1.08);
+}
+
+.page-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.page-indicator {
+    min-width: 48px;
+    text-align: center;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.menu-empty {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 60px 24px;
+    text-align: center;
+    font-family: "Fraunces", serif;
+    font-size: 1.8rem;
+    color: var(--muted);
 }
 
 @media (max-width: 760px) {

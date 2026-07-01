@@ -44,9 +44,51 @@ function categoryHTML(cat, items, index) {
         </section>`;
 }
 
-async function loadMenu() {
-    const root = document.getElementById("menu-root");
+let pageBuilders = [];
+let pageIndex = 0;
+let animating = false;
 
+function renderPage() {
+    const root = document.getElementById("menu-root");
+    root.innerHTML = pageBuilders[pageIndex]();
+    revealScan(root);
+    updateNav();
+}
+
+function updateNav() {
+    document.getElementById("page-prev").disabled = pageIndex === 0;
+    document.getElementById("page-next").disabled = pageIndex === pageBuilders.length - 1;
+    document.getElementById("page-indicator").textContent = `${pageIndex + 1} / ${pageBuilders.length}`;
+}
+
+// слайд вбок: текущая уезжает, новая въезжает с другой стороны
+function goToPage(target) {
+    if (target < 0 || target >= pageBuilders.length || animating) return;
+    const root = document.getElementById("menu-root");
+    const dir = target > pageIndex ? 1 : -1;
+    animating = true;
+
+    root.style.transition = "transform 0.4s ease, opacity 0.4s ease";
+    root.style.transform = `translateX(${-60 * dir}px)`;
+    root.style.opacity = "0";
+
+    setTimeout(() => {
+        pageIndex = target;
+        renderPage();
+        window.scrollTo(0, 0);
+
+        root.style.transition = "none";
+        root.style.transform = `translateX(${60 * dir}px)`;
+        requestAnimationFrame(() => {
+            root.style.transition = "transform 0.4s ease, opacity 0.4s ease";
+            root.style.transform = "translateX(0)";
+            root.style.opacity = "1";
+            setTimeout(() => { animating = false; }, 400);
+        });
+    }, 400);
+}
+
+async function loadMenu() {
     const { data: categories, error: catErr } = await db
         .from("categories")
         .select("*")
@@ -60,13 +102,21 @@ async function loadMenu() {
         .order("id");
 
     if (catErr || itemErr) {
-        root.textContent = "Failed to load menu :(";
+        document.getElementById("menu-root").textContent = "Failed to load menu :(";
         console.error(catErr || itemErr);
         return;
     }
 
-    root.innerHTML = categories.map((cat, i) => categoryHTML(cat, items, i)).join("");
-    revealScan(root);
+    // каждая функция = отдельная страница меню. Добавляй новые сюда.
+    pageBuilders = [
+        () => categories.map((cat, i) => categoryHTML(cat, items, i)).join(""),
+        () => `<div class="menu-empty">Здесь будет ещё одна страница меню 🙂</div>`,
+    ];
+    pageIndex = 0;
+    renderPage();
+
+    document.getElementById("page-prev").onclick = () => goToPage(pageIndex - 1);
+    document.getElementById("page-next").onclick = () => goToPage(pageIndex + 1);
 }
 
 loadMenu();
