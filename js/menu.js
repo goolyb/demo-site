@@ -31,10 +31,21 @@ function itemHTML(i) {
 function buildPages(categories, items) {
     return categories.map(cat => `
         <div class="page">
-            <h2 class="cat-title">${cat.name}</h2>
-            <div class="cat-items">
-                ${items.filter(i => i.category_id === cat.id).map(itemHTML).join("")}
+            <div class="face front">
+                <section class="menu-category">
+                    ${cat.image_url ? `
+                        <div class="cat-photo">
+                            <img src="${cat.image_url}" alt="${cat.name}">
+                        </div>` : ""}
+                    <div class="cat-body">
+                        <h2 class="cat-title">${cat.name}</h2>
+                        <div class="cat-items">
+                            ${items.filter(i => i.category_id === cat.id).map(itemHTML).join("")}
+                        </div>
+                    </div>
+                </section>
             </div>
+            <div class="face back"></div>
         </div>`);
 }
 
