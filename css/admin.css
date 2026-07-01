@@ -1,15 +1,12 @@
 :root {
-    /* surfaces — page → panel → card */
     --surface-page: #f7f1e6;
     --surface-panel: #fbf7ef;
     --surface-card: #ffffff;
 
-    /* ink — heading → body → meta */
     --ink-strong: #3a1c08;
     --ink: #4b240c;
     --ink-soft: #8a7a68;
 
-    /* accent — interaction & highlight */
     --accent: #b87514;
     --accent-soft: #f1ad46;
 

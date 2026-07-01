@@ -14,8 +14,30 @@ function badgeStyle(color) {
     return `background:${color};color:${text};`;
 }
 
+function skeletonMarkup(categories = 3, itemsPer = 5) {
+    const rows = n => Array.from({ length: n }, () => `
+        <div class="menu-item">
+            <div class="menu-item-row">
+                <span class="sk sk-name"></span>
+                <span class="leader"></span>
+                <span class="sk sk-price"></span>
+            </div>
+            <span class="sk sk-desc"></span>
+        </div>`).join("");
+
+    return Array.from({ length: categories }, () => `
+        <section class="menu-category">
+            <div class="cat-photo"><span class="sk sk-photo"></span></div>
+            <div class="cat-body">
+                <span class="sk sk-title"></span>
+                <div class="cat-items">${rows(itemsPer)}</div>
+            </div>
+        </section>`).join("");
+}
+
 async function loadMenu() {
     const root = document.getElementById("menu-root");
+    root.innerHTML = skeletonMarkup();
 
     const { data: categories, error: catErr } = await db
         .from("categories")
