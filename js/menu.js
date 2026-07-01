@@ -84,3 +84,13 @@ async function loadMenu() {
 }
 
 loadMenu();
+
+const pages = [...document.querySelectorAll(".page")];
+let current = 0;
+pages.forEach((p, i) => p.style.zIndex = pages.length - i);
+
+document.getElementById("flip").onclick = () => {
+    if (current >= pages.length) return;
+    pages[current].classList.add("flipped");
+    current++;
+};

@@ -226,6 +226,38 @@ body {
     transform: translateY(-1px);
 }
 
+.stage{
+
+}
+
+.book{
+    position: relative;
+    width: 460px;
+    height: 600px;
+    margin: 40px auto;
+    perspective: 1500px;
+}
+
+.page{
+    position: absolute; inset: 0;
+    background: white;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transform-origin: left center;
+    transition: transform 0.8s;
+}
+
+.page.flipped{
+    transform: rotateY(-180deg);
+}
+
+.flip-btn{
+    display: flex;
+
+    margin: 0 auto;
+}
+
 @media (max-width: 760px) {
     .login-btn {
         top: 16px;
@@ -240,3 +272,5 @@ body {
         font-size: 0.85rem;
     }
 }
+
+
