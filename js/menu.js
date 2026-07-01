@@ -14,30 +14,51 @@ function badgeStyle(color) {
     return `background:${color};color:${text};`;
 }
 
-function skeletonMarkup(categories = 3, itemsPer = 5) {
-    const rows = n => Array.from({ length: n }, () => `
+function itemHTML(i) {
+    return `
         <div class="menu-item">
             <div class="menu-item-row">
-                <span class="sk sk-name"></span>
+                <span class="menu-item-name">${i.name}</span>
+                ${i.badge ? `<span class="badge" style="${badgeStyle(i.badge_color)}">${i.badge}</span>` : ""}
                 <span class="leader"></span>
-                <span class="sk sk-price"></span>
+                <span class="menu-item-price">€ ${Number(i.price).toFixed(2)}</span>
             </div>
-            <span class="sk sk-desc"></span>
-        </div>`).join("");
+            ${i.description ? `<p class="menu-item-desc">${i.description}</p>` : ""}
+        </div>`;
+}
 
-    return Array.from({ length: categories }, () => `
-        <section class="menu-category">
-            <div class="cat-photo"><span class="sk sk-photo"></span></div>
-            <div class="cat-body">
-                <span class="sk sk-title"></span>
-                <div class="cat-items">${rows(itemsPer)}</div>
+// данные -> массив HTML-страниц. Пока: 1 категория = 1 страница.
+function buildPages(categories, items) {
+    return categories.map(cat => `
+        <div class="page">
+            <h2 class="cat-title">${cat.name}</h2>
+            <div class="cat-items">
+                ${items.filter(i => i.category_id === cat.id).map(itemHTML).join("")}
             </div>
-        </section>`).join("");
+        </div>`);
+}
+
+// движок листания. Запускать ТОЛЬКО после того как страницы уже в DOM.
+function initFlip() {
+    const pages = [...document.querySelectorAll(".page")];
+    let current = 0;
+    pages.forEach((p, i) => p.style.zIndex = pages.length - i);
+
+    document.getElementById("flip-in").onclick = () => {
+        if (current >= pages.length) return;
+        pages[current].classList.add("flipped");
+        current++;
+    };
+
+    document.getElementById("flip-out").onclick = () => {
+        if (current <= 0) return;
+        current--;
+        pages[current].classList.remove("flipped");
+    };
 }
 
 async function loadMenu() {
-    const root = document.getElementById("menu-root");
-    root.innerHTML = skeletonMarkup();
+    const book = document.querySelector(".book");
 
     const { data: categories, error: catErr } = await db
         .from("categories")
@@ -52,45 +73,13 @@ async function loadMenu() {
         .order("id");
 
     if (catErr || itemErr) {
-        root.textContent = "Failed to load menu :(";
+        book.innerHTML = `<div class="page">Failed to load menu :(</div>`;
         console.error(catErr || itemErr);
         return;
     }
 
-    root.innerHTML = categories.map(cat => `
-        <section class="menu-category">
-            ${cat.image_url ? `
-                <div class="cat-photo">
-                    <img src="${cat.image_url}" alt="${cat.name}">
-                </div>` : ""}
-            <div class="cat-body">
-                <h2 class="cat-title">${cat.name}</h2>
-                <div class="cat-items">
-                    ${items.filter(i => i.category_id === cat.id).map(i => `
-                        <div class="menu-item">
-                            <div class="menu-item-row">
-                                <span class="menu-item-name">${i.name}</span>
-                                ${i.badge ? `<span class="badge" style="${badgeStyle(i.badge_color)}">${i.badge}</span>` : ""}
-                                <span class="leader"></span>
-                                <span class="menu-item-price">€ ${Number(i.price).toFixed(2)}</span>
-                            </div>
-                            ${i.description ? `<p class="menu-item-desc">${i.description}</p>` : ""}
-                        </div>
-                    `).join("")}
-                </div>
-            </div>
-        </section>
-    `).join("");
+    book.innerHTML = buildPages(categories, items).join("");
+    initFlip();
 }
 
 loadMenu();
-
-const pages = [...document.querySelectorAll(".page")];
-let current = 0;
-pages.forEach((p, i) => p.style.zIndex = pages.length - i);
-
-document.getElementById("flip").onclick = () => {
-    if (current >= pages.length) return;
-    pages[current].classList.add("flipped");
-    current++;
-};
