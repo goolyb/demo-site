@@ -27,29 +27,42 @@ function itemHTML(i) {
         </div>`;
 }
 
-// данные -> массив HTML-страниц. Пока: 1 категория = 1 страница.
-function buildPages(categories, items) {
-    return categories.map(cat => `
-        <div class="page">
-            <div class="face front">
-                <section class="menu-category">
-                    ${cat.image_url ? `
-                        <div class="cat-photo">
-                            <img src="${cat.image_url}" alt="${cat.name}">
-                        </div>` : ""}
-                    <div class="cat-body">
-                        <h2 class="cat-title">${cat.name}</h2>
-                        <div class="cat-items">
-                            ${items.filter(i => i.category_id === cat.id).map(itemHTML).join("")}
-                        </div>
-                    </div>
-                </section>
+function categoryHTML(cat, items) {
+    return `
+        <section class="menu-category">
+            ${cat.image_url ? `
+                <div class="cat-photo">
+                    <img src="${cat.image_url}" alt="${cat.name}">
+                </div>` : ""}
+            <div class="cat-body">
+                <h2 class="cat-title">${cat.name}</h2>
+                <div class="cat-items">
+                    ${items.filter(i => i.category_id === cat.id).map(itemHTML).join("")}
+                </div>
             </div>
-            <div class="face back"></div>
-        </div>`);
+        </section>`;
 }
 
-// движок листания. Запускать ТОЛЬКО после того как страницы уже в DOM.
+// пока: одна страница со всеми категориями (как старое меню).
+// дальше сюда можно добавлять ещё <div class="page">...</div>.
+function buildPages(categories, items) {
+    return `
+        <div class="page">
+            <div class="face front">
+                <div class="page-inner">
+                    ${categories.map(cat => categoryHTML(cat, items)).join("")}
+                </div>
+            </div>
+            <div class="face back"></div>
+        </div>`;
+}
+
+// высота книги = высоте контента самой длинной страницы
+function fitBookHeight(book) {
+    const inner = book.querySelector(".page-inner");
+    if (inner) book.style.height = inner.scrollHeight + "px";
+}
+
 function initFlip() {
     const pages = [...document.querySelectorAll(".page")];
     let current = 0;
@@ -89,7 +102,8 @@ async function loadMenu() {
         return;
     }
 
-    book.innerHTML = buildPages(categories, items).join("");
+    book.innerHTML = buildPages(categories, items);
+    fitBookHeight(book);
     initFlip();
 }
 
