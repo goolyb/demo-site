@@ -107,8 +107,6 @@ async function loadMenu() {
         return;
     }
 
-    // группируем категории по номеру страницы (categories.page).
-    // сколько разных номеров — столько страниц в меню.
     const pageNums = [...new Set(categories.map(c => c.page ?? 1))].sort((a, b) => a - b);
     pageBuilders = pageNums.map(pn => () =>
         categories
