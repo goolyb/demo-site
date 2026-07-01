@@ -27,9 +27,10 @@ function itemHTML(i) {
         </div>`;
 }
 
-function categoryHTML(cat, items) {
+function categoryHTML(cat, items, index) {
+    const dir = index % 2 === 0 ? "reveal-left" : "reveal-right";
     return `
-        <section class="menu-category">
+        <section class="menu-category reveal ${dir}">
             ${cat.image_url ? `
                 <div class="cat-photo">
                     <img src="${cat.image_url}" alt="${cat.name}">
@@ -43,46 +44,8 @@ function categoryHTML(cat, items) {
         </section>`;
 }
 
-// пока: одна страница со всеми категориями (как старое меню).
-// дальше сюда можно добавлять ещё <div class="page">...</div>.
-function buildPages(categories, items) {
-    return `
-        <div class="page">
-            <div class="face front">
-                <div class="page-inner">
-                    ${categories.map(cat => categoryHTML(cat, items)).join("")}
-                </div>
-            </div>
-            <div class="face back"></div>
-        </div>`;
-}
-
-// высота книги = высоте контента самой длинной страницы
-function fitBookHeight(book) {
-    const inner = book.querySelector(".page-inner");
-    if (inner) book.style.height = inner.scrollHeight + "px";
-}
-
-function initFlip() {
-    const pages = [...document.querySelectorAll(".page")];
-    let current = 0;
-    pages.forEach((p, i) => p.style.zIndex = pages.length - i);
-
-    document.getElementById("flip-in").onclick = () => {
-        if (current >= pages.length) return;
-        pages[current].classList.add("flipped");
-        current++;
-    };
-
-    document.getElementById("flip-out").onclick = () => {
-        if (current <= 0) return;
-        current--;
-        pages[current].classList.remove("flipped");
-    };
-}
-
 async function loadMenu() {
-    const book = document.querySelector(".book");
+    const root = document.getElementById("menu-root");
 
     const { data: categories, error: catErr } = await db
         .from("categories")
@@ -97,14 +60,13 @@ async function loadMenu() {
         .order("id");
 
     if (catErr || itemErr) {
-        book.innerHTML = `<div class="page">Failed to load menu :(</div>`;
+        root.textContent = "Failed to load menu :(";
         console.error(catErr || itemErr);
         return;
     }
 
-    book.innerHTML = buildPages(categories, items);
-    fitBookHeight(book);
-    initFlip();
+    root.innerHTML = categories.map((cat, i) => categoryHTML(cat, items, i)).join("");
+    revealScan(root);
 }
 
 loadMenu();

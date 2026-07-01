@@ -226,59 +226,27 @@ body {
     transform: translateY(-1px);
 }
 
-.stage{
-
+.reveal {
+    opacity: 0;
+    transform: translateY(38px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.book{
-    position: relative;
-    width: min(1040px, 94vw);
-    height: 640px;
-    margin: 40px auto;
-    perspective: 2200px;
+.reveal-left  { transform: translateX(-52px); }
+.reveal-right { transform: translateX(52px); }
+
+.reveal.in {
+    opacity: 1;
+    transform: none;
 }
 
-.page-inner{
-    display: flex;
-    flex-direction: column;
-    gap: 56px;
-    padding: 48px;
-}
-
-.face .menu-category{
-    max-width: none;
-    margin: 0;
-    padding: 0;
-}
-
-.page{
-    position: absolute; inset: 0;
-    transform-origin: left center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
-
-.page.flipped{
-    transform: rotateY(-180deg);
-}
-
-.face{
-    position: absolute; inset: 0;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    backface-visibility: hidden;
-    overflow: hidden;
-}
-
-.face.back{
-    transform: rotateY(180deg);
-}
-
-.flip-btn{
-    display: flex;
-
-    margin: 0 auto;
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-left,
+    .reveal-right {
+        transition: none;
+    }
 }
 
 @media (max-width: 760px) {

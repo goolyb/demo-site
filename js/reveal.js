@@ -30,18 +30,23 @@ function reveal(el) {
     }, 1400);
 }
 
-const targets = document.querySelectorAll(".reveal");
+const observer = reduceMotion ? null : new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            reveal(entry.target);
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15 });
 
-if (reduceMotion) {
-    targets.forEach((el) => el.classList.add("in"));
-} else {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                reveal(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
-    targets.forEach((el) => observer.observe(el));
+// сканирует .reveal и запускает наблюдение. Можно звать повторно
+// после того как в DOM добавили новые .reveal (напр. подгруженное меню).
+function revealScan(root = document) {
+    root.querySelectorAll(".reveal").forEach((el) => {
+        if (reduceMotion) el.classList.add("in");
+        else observer.observe(el);
+    });
 }
+
+revealScan();
+window.revealScan = revealScan;
