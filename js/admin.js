@@ -44,6 +44,7 @@ async function loadCategories() {
             <span class="drag-handle">⠿</span>
             ${c.image_url ? `<img src="${c.image_url}" style="max-width:80px;">` : "(no photo)"}
             <b>${c.name}</b>
+            <label class="cat-page">стр. <input type="number" min="1" value="${c.page ?? 1}" onchange="setCatPage(${c.id}, this.value)"></label>
             <label class="file-btn" for="cat-file-${c.id}">Photo</label>
             <input id="cat-file-${c.id}" type="file" accept="image/*" hidden onchange="uploadCatPhoto(${c.id}, this)">
             <button onclick="renameCat(${c.id})"><i class="fa-solid fa-pencil"></i></button>
@@ -104,6 +105,12 @@ window.renameCat = async (catId) => {
         .update({ name: name.trim() }).eq("id", catId);
     if (error) { alert(error.message); return; }
     await loadCategories();
+};
+
+window.setCatPage = async (catId, value) => {
+    const page = Math.max(1, parseInt(value) || 1);
+    const { error } = await db.from("categories").update({ page }).eq("id", catId);
+    if (error) alert(error.message);
 };
 
 window.deleteCat = async (catId) => {

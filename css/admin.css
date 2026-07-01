@@ -183,6 +183,24 @@ button:hover { opacity: 0.85; }
 
 .cat-row b { flex: 1; }
 
+.cat-page {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+}
+
+.cat-page input {
+    width: 52px;
+    padding: 4px 6px;
+    border: 1px solid var(--ink-soft);
+    border-radius: 6px;
+    font: inherit;
+    text-align: center;
+}
+
 .drag-handle {
     cursor: grab;
     color: var(--ink-soft);
