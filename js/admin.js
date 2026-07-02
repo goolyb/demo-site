@@ -6,20 +6,32 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const $ = (id) => document.getElementById(id);
 
+function esc(s) {
+    return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+}
+
+let recovering = false;
+
 async function refreshUI() {
+    if (recovering) return;
     const { data: { session } } = await db.auth.getSession();
     if (session) {
         $("login-box").style.display = "none";
+        $("reset-box").style.display = "none";
         $("admin-box").style.display = "block";
         await loadCategories();
         await loadItems();
     } else {
         $("login-box").style.display = "block";
+        $("reset-box").style.display = "none";
         $("admin-box").style.display = "none";
     }
 }
 
-$("login-btn").onclick = async () => {
+$("login-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
     $("login-error").textContent = "";
     const { error } = await db.auth.signInWithPassword({
         email: $("email").value,
@@ -27,7 +39,49 @@ $("login-btn").onclick = async () => {
     });
     if (error) $("login-error").textContent = error.message;
     else refreshUI();
+});
+
+$("toggle-password").onclick = () => {
+    const inp = $("password");
+    const show = inp.type === "password";
+    inp.type = show ? "text" : "password";
+    $("toggle-password").querySelector("i").className = show ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+    $("toggle-password").setAttribute("aria-label", show ? "Hide password" : "Show password");
 };
+
+$("forgot-btn").onclick = async () => {
+    const email = $("email").value.trim();
+    $("login-error").textContent = "";
+    if (!email) { $("login-error").textContent = "Enter your email first, then click again."; return; }
+    const { error } = await db.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.href.split("#")[0],
+    });
+    $("login-error").textContent = error
+        ? error.message
+        : "Recovery link sent — check your inbox.";
+};
+
+// возврат по ссылке из письма: Supabase кидает событие PASSWORD_RECOVERY
+db.auth.onAuthStateChange((event) => {
+    if (event === "PASSWORD_RECOVERY") {
+        recovering = true;
+        $("login-box").style.display = "none";
+        $("admin-box").style.display = "none";
+        $("reset-box").style.display = "block";
+    }
+});
+
+$("reset-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    $("reset-msg").textContent = "";
+    const pw = $("new-password").value;
+    if (pw.length < 6) { $("reset-msg").textContent = "At least 6 characters."; return; }
+    const { error } = await db.auth.updateUser({ password: pw });
+    if (error) { $("reset-msg").textContent = error.message; return; }
+    recovering = false;
+    $("new-password").value = "";
+    await refreshUI();
+});
 
 $("logout-btn").onclick = async () => {
     await db.auth.signOut();
@@ -37,20 +91,30 @@ $("logout-btn").onclick = async () => {
 async function loadCategories() {
     const { data } = await db.from("categories").select("*").order("sort_order");
     window._cats = data;
+    const pages = [...new Set(data.map(c => c.page ?? 1))].sort((a, b) => a - b);
+
     $("f-category").innerHTML = data.map(c =>
-        `<option value="${c.id}">${c.name}</option>`).join("");
-    $("cat-list").innerHTML = data.map(c => `
+        `<option value="${c.id}">${esc(c.name)}</option>`).join("");
+
+    const catCard = (c) => `
         <div class="cat-row" draggable="true" data-id="${c.id}">
             <span class="drag-handle">⠿</span>
-            ${c.image_url ? `<img src="${c.image_url}" style="max-width:80px;">` : "(no photo)"}
-            <b>${c.name}</b>
-            <label class="cat-page">стр. <input type="number" min="1" value="${c.page ?? 1}" onchange="setCatPage(${c.id}, this.value)"></label>
+            ${c.image_url ? `<img src="${esc(c.image_url)}" alt="${esc(c.name)}" style="max-width:80px;">` : "(no photo)"}
+            <b>${esc(c.name)}</b>
+            <label class="cat-page">page <input type="number" min="1" value="${c.page ?? 1}" onchange="setCatPage(${c.id}, this.value)"></label>
             <label class="file-btn" for="cat-file-${c.id}">Photo</label>
             <input id="cat-file-${c.id}" type="file" accept="image/*" hidden onchange="uploadCatPhoto(${c.id}, this)">
             <button onclick="renameCat(${c.id})"><i class="fa-solid fa-pencil"></i></button>
             <button onclick="deleteCat(${c.id})"><i class="fa-solid fa-trash-can"></i></button>
+        </div>`;
+
+    $("cat-list").innerHTML = pages.map(pn => `
+        <div class="page-block">
+            <h3>Page ${pn}</h3>
+            ${data.filter(c => (c.page ?? 1) === pn).map(catCard).join("")}
         </div>
     `).join("");
+
     enableCatDnd();
 }
 
@@ -137,14 +201,16 @@ async function loadItems() {
     if (error) { $("items-list").textContent = error.message; return; }
     window._items = data;
     const cats = window._cats || [];
-    const catOptions = cats.map(c => `<option value="${c.id}">${c.name}</option>`).join("");
+    const catOptions = cats.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("");
+    const pages = [...new Set(cats.map(c => c.page ?? 1))].sort((a, b) => a - b);
 
     const renderCard = (i) => `
         <div class="item-card${i.is_available ? "" : " is-hidden"}" data-id="${i.id}" data-cat="${i.category_id}">
             <div class="item-row">
                 <span class="drag-handle" title="Drag to reorder">⠿</span>
-                <b>${i.name}</b> — € ${Number(i.price).toFixed(2)}
-                ${i.is_available ? "" : `<span class="hidden-tag">hidden</span>`}
+                <b>${esc(i.name)}</b>
+                <span class="hidden-tag">hidden</span>
+                <span class="item-price">€ ${Number(i.price).toFixed(2)}</span>
                 <span class="item-actions">
                     <button onclick="toggleAvailable(${i.id})" title="Show / hide">
                         <i class="fa-solid ${i.is_available ? "fa-eye" : "fa-eye-slash"}"></i>
@@ -155,15 +221,15 @@ async function loadItems() {
             </div>
             <div class="item-edit" id="edit-${i.id}">
                 <div class="item-edit-inner">
-                    <input class="e-name" type="text" placeholder="Name" value="${i.name}">
+                    <input class="e-name" type="text" placeholder="Name" value="${esc(i.name)}">
                     <select class="e-cat">${catOptions}</select>
                     <input class="e-price" type="number" step="0.10" placeholder="Price" value="${i.price}">
-                    <input class="e-desc" type="text" placeholder="Description" value="${i.description || ""}">
+                    <input class="e-desc" type="text" placeholder="Description" value="${esc(i.description || "")}">
                     <div class="badge-row">
-                        <input class="e-badge" type="text" placeholder="Badge (optional)" value="${i.badge || ""}">
-                        <input class="e-badge-color" type="color" value="${i.badge_color || "#f1ad46"}" title="Badge color">
+                        <input class="e-badge" type="text" placeholder="Badge (optional)" value="${esc(i.badge || "")}">
+                        <input class="e-badge-color" type="color" value="${i.badge_color || "#e6a24a"}" title="Badge color">
                     </div>
-                    ${i.image_url ? `<img class="e-preview" src="${i.image_url}">` : ""}
+                    ${i.image_url ? `<img class="e-preview" src="${esc(i.image_url)}" alt="">` : ""}
 
                     <div class="item-edit-btns">
                         <input class="e-image" type="file" accept="image/*">
@@ -176,11 +242,17 @@ async function loadItems() {
 
     const renderGroup = (title, items, catId) => `
         <div class="item-group" data-cat="${catId}">
-            <h3 class="item-group-title">${title} <span class="item-group-count">${items.length}</span></h3>
+            <h3 class="item-group-title">${esc(title)} <span class="item-group-count">${items.length}</span></h3>
             ${items.length ? items.map(renderCard).join("") : `<p class="item-group-empty">No items yet</p>`}
         </div>`;
 
-    let html = cats.map(c => renderGroup(c.name, data.filter(i => i.category_id === c.id), c.id)).join("");
+    let html = pages.map(pn => `
+        <div class="page-block">
+            <h3>Page ${pn}</h3>
+            ${cats.filter(c => (c.page ?? 1) === pn)
+                .map(c => renderGroup(c.name, data.filter(i => i.category_id === c.id), c.id))
+                .join("")}
+        </div>`).join("");
     const orphans = data.filter(i => !cats.some(c => c.id === i.category_id));
     if (orphans.length) html += renderGroup("Uncategorized", orphans, "");
 
@@ -318,12 +390,32 @@ window.saveItem = async (id) => {
     setTimeout(loadItems, 300);
 };
 
+function paintAvailability(id, available) {
+    const card = document.querySelector(`.item-card[data-id="${id}"]`);
+    if (!card) return;
+    card.classList.toggle("is-hidden", !available);
+    const icon = card.querySelector(".item-actions .fa-eye, .item-actions .fa-eye-slash");
+    if (icon) {
+        icon.classList.toggle("fa-eye", available);
+        icon.classList.toggle("fa-eye-slash", !available);
+    }
+}
+
 window.toggleAvailable = async (id) => {
     const item = (window._items || []).find(i => i.id === id);
+    if (!item) return;
+    const next = !item.is_available;
+
+    item.is_available = next;
+    paintAvailability(id, next);
+
     const { error } = await db.from("menu_items")
-        .update({ is_available: !item.is_available }).eq("id", id);
-    if (error) { alert(error.message); return; }
-    await loadItems();
+        .update({ is_available: next }).eq("id", id);
+    if (error) {
+        item.is_available = !next;
+        paintAvailability(id, !next);
+        alert(error.message);
+    }
 };
 
 window.deleteItem = async (id) => {
@@ -346,7 +438,7 @@ function resetForm() {
     $("f-name").value = "";
     $("f-description").value = "";
     $("f-badge").value = "";
-    $("f-badge-color").value = "#f1ad46";
+    $("f-badge-color").value = "#e6a24a";
     $("f-price").value = "";
     $("f-image").value = "";
     $("f-filename").textContent = "No file chosen";

@@ -4,29 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin — Café Franca</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
     <div id="login-box">
         <a href="menu.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to menu</a>
-        <h2>Login</h2>
-        <input id="email" type="email" placeholder="email">
-        <input id="password" type="password" placeholder="password">
-        <button id="login-btn">Log in</button>
-        <p id="login-error" style="color:red;"></p>
+        <p class="admin-eyebrow">Café Franca</p>
+        <h2>Staff login</h2>
+        <p class="login-hint">Sign in to manage the menu.</p>
+        <form id="login-form">
+            <label class="sr-only" for="email">Email</label>
+            <input id="email" type="email" placeholder="email" autocomplete="username">
+            <label class="sr-only" for="password">Password</label>
+            <div class="password-field">
+                <input id="password" type="password" placeholder="password" autocomplete="current-password">
+                <button type="button" id="toggle-password" class="pw-toggle" aria-label="Show password">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </div>
+            <button id="login-btn" type="submit">Log in</button>
+            <button id="forgot-btn" type="button" class="link-btn">Forgot password?</button>
+            <p id="login-error"></p>
+        </form>
+    </div>
+
+    <div id="reset-box" style="display:none;">
+        <p class="admin-eyebrow">Café Franca</p>
+        <h2>Set a new password</h2>
+        <p class="login-hint">Enter a new password for your account.</p>
+        <form id="reset-form">
+            <label class="sr-only" for="new-password">New password</label>
+            <input id="new-password" type="password" placeholder="new password" autocomplete="new-password">
+            <button type="submit">Save new password</button>
+            <p id="reset-msg"></p>
+        </form>
     </div>
 
     <div id="admin-box" style="display:none;">
-        <a href="menu.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to menu</a>
-        <button id="logout-btn">Log out</button>
-
-        <h1>Admin — Café Franca</h1>
+        <header class="admin-head">
+            <div class="admin-head-top">
+                <a href="menu.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to menu</a>
+                <button id="logout-btn">Log out</button>
+            </div>
+            <h1>Menu manager</h1>
+            <p class="admin-sub">Build the pages of your menu book.</p>
+        </header>
 
         <h2>Categories</h2>
         <div id="cat-list"></div>
         <div id="cat-add">
+            <label class="sr-only" for="cat-name">New category name</label>
             <input id="cat-name" type="text" placeholder="New category">
             <button id="add-cat-btn">Add category</button>
         </div>
@@ -36,15 +65,20 @@
         <div id="form-box">
             <h3 id="form-title">New item</h3>
             <input id="f-id" type="hidden">
+            <label class="sr-only" for="f-category">Category</label>
             <select id="f-category"></select>
+            <label class="sr-only" for="f-name">Name</label>
             <input id="f-name" type="text" placeholder="Name">
+            <label class="sr-only" for="f-description">Description</label>
             <input id="f-description" type="text" placeholder="Description">
             <div class="badge-row">
+                <label class="sr-only" for="f-badge">Badge</label>
                 <input id="f-badge" type="text" placeholder="Badge (optional)">
-                <input id="f-badge-color" type="color" value="#f1ad46" title="Badge color">
+                <input id="f-badge-color" type="color" value="#e6a24a" title="Badge color">
             </div>
+            <label class="sr-only" for="f-price">Price</label>
             <input id="f-price" type="number" step="0.01" placeholder="Price">
-            <img id="f-preview" style="max-width:100px; display:none;">
+            <img id="f-preview" alt="Item photo preview" style="max-width:100px; display:none;">
             <div class="file-row">
                 <label for="f-image" class="file-btn">Choose photo</label>
                 <input id="f-image" type="file" accept="image/*" hidden>
