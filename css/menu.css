@@ -183,8 +183,11 @@ body {
         width: 100%;
         flex-basis: auto;
     }
-    .sk-photo { width: 100%; }
-    .menu-title { font-size: 2.5rem; }
+    .cat-photo img,
+    .sk-photo { width: 100%; height: 190px; }
+    .menu-title { font-size: 2.5rem; margin-top: 70px; }
+    .menu-subtitle { font-size: 1.35rem; margin-bottom: 36px; }
+    .cat-title { font-size: 1.8rem; }
 }
 
 
