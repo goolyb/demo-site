@@ -1903,10 +1903,11 @@ input::placeholder {
     .who-question::after, .who-reverse .who-question::after { bottom: -14px; left: 4px; right: auto; width: 56px; }
     .who-description { font-size: 1.05rem; line-height: 1.7; top: 16px; max-width: 34ch; }
 
-    .about-stats { gap: 22px 16px; padding: 32px 20px; }
-    .about-stat { flex: 1 1 40%; min-width: 40%; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 12px; padding: 36px 20px; }
+    .about-stat { flex: none; min-width: 0; }
     .about-stat:not(:last-child)::after { display: none; }
-    .about-stat-num { font-size: 2.1rem; }
+    .about-stat-num { font-size: 2rem; }
+    .about-stat:last-child .about-stat-num { font-size: 1.55rem; }
 
     .theme-text { font-size: 1.7rem; gap: 14px; height: 96px; word-spacing: 6px; }
     .theme-text::before, .theme-text::after { max-width: 50px; }
