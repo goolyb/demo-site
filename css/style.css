@@ -1936,7 +1936,7 @@ input::placeholder {
     }
     .review-card.hidden { opacity: 1 !important; }
     .review-inner {
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
         gap: 14px;
         height: auto !important;
@@ -1946,10 +1946,11 @@ input::placeholder {
         transform: none !important;
         width: 100% !important;
     }
-    .review-avatar, .review-card .review-avatar { height: auto; margin-left: 0 !important; width: auto; }
+    .review-avatar, .review-card .review-avatar { height: auto; margin-left: 0 !important; width: auto; justify-content: center; }
     .avatar { height: 84px; width: 84px; }
-    .review-info-wrapper { height: auto; width: 100%; }
-    .review-info { margin-bottom: 0; margin-left: 0; }
+    .review-info-wrapper { align-items: center; height: auto; width: 100%; }
+    .review-info { align-items: center; display: flex; flex-direction: column; margin-bottom: 0; margin-left: 0; }
+    .stars { justify-content: center; }
     .review-text1 { font-size: 1.05rem; line-height: 1.6; width: 100%; }
     .review-text1 svg { height: 30px !important; margin-bottom: 0 !important; width: 30px !important; }
     .review-stat-wrapper { margin-top: 4px; position: static; transform: none; width: 100%; }
