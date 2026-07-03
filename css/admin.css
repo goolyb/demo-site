@@ -144,6 +144,16 @@ button {
     transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
+#save-btn {
+    background: var(--accent-soft);
+    color: #3a1c08;
+}
+
+#save-btn:hover {
+    background: #d8912f;
+    box-shadow: 0 3px 10px rgb(230 162 74 / 0.4);
+}
+
 button:hover {
     background: var(--accent-deep);
     box-shadow: 0 3px 10px rgb(156 63 20 / 0.3);

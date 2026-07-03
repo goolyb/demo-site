@@ -188,11 +188,13 @@ window.deleteCat = async (catId) => {
 $("add-cat-btn").onclick = async () => {
     const name = $("cat-name").value.trim();
     if (!name) return;
+    const page = Math.max(1, parseInt($("cat-page-new").value) || 1);
     const nextOrder = (window._cats?.length
         ? Math.max(...window._cats.map(c => c.sort_order)) : 0) + 1;
-    const { error } = await db.from("categories").insert({ name, sort_order: nextOrder });
+    const { error } = await db.from("categories").insert({ name, page, sort_order: nextOrder });
     if (error) { alert(error.message); return; }
     $("cat-name").value = "";
+    $("cat-page-new").value = "1";
     await loadCategories();
 };
 
