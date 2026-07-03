@@ -145,8 +145,8 @@ button {
 }
 
 button:hover {
-    background: var(--accent-deep);
-    box-shadow: 0 3px 10px rgb(156 63 20 / 0.3);
+    background: #854d24;
+    box-shadow: 0 3px 10px rgb(75 38 12 / 0.22);
 }
 
 .back-link {
@@ -183,7 +183,7 @@ button:hover {
 }
 
 .cat-row:hover {
-    border-color: var(--accent);
+    border-color: var(--accent-soft);
     box-shadow: 0 4px 12px rgb(47 21 3 / 0.1);
 }
 
@@ -192,12 +192,12 @@ button:hover {
 
 .cat-row.drag-over,
 .item-card.drag-over {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgb(184 117 20 / 0.35);
+    border-color: var(--accent-soft);
+    box-shadow: 0 0 0 2px rgb(230 162 74 / 0.4);
 }
 
 .item-group.drag-over {
-    outline: 2px dashed var(--accent);
+    outline: 2px dashed var(--accent-soft);
     outline-offset: 4px;
     border-radius: 10px;
 }
@@ -402,9 +402,10 @@ input[type="number"] {
 
 }
 
-#items-list .item-edit-btns button { background: var(--accent-soft); border: none; color: #3a1c08; }
-#items-list .item-edit-btns button:hover { background: #d8912f; box-shadow: 0 3px 10px rgb(230 162 74 / 0.4); }
-#items-list .item-edit-btns .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+#items-list .item-edit-btns button { background: #9f5e2d; border: none; color: white; }
+#items-list .item-edit-btns button:hover { background: var(--accent-deep); box-shadow: 0 3px 10px rgb(230 162 74 / 0.4); color: white; }
+#items-list .item-edit-btns .btn-ghost { background: transparent; border: 2px solid var(--line); color: var(--ink); }
+#items-list .item-edit-btns .btn-ghost:hover{background: none; color: var(--ink);}
 
 .file-row {
     display: flex;
