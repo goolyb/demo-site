@@ -144,16 +144,6 @@ button {
     transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
-#save-btn {
-    background: var(--accent-soft);
-    color: #3a1c08;
-}
-
-#save-btn:hover {
-    background: #d8912f;
-    box-shadow: 0 3px 10px rgb(230 162 74 / 0.4);
-}
-
 button:hover {
     background: var(--accent-deep);
     box-shadow: 0 3px 10px rgb(156 63 20 / 0.3);
@@ -412,8 +402,9 @@ input[type="number"] {
 
 }
 
-.item-edit-btns button { background: var(--accent); color: #fff; }
-.item-edit-btns .btn-ghost { background: transparent; }
+#items-list .item-edit-btns button { background: var(--accent-soft); border: none; color: #3a1c08; }
+#items-list .item-edit-btns button:hover { background: #d8912f; box-shadow: 0 3px 10px rgb(230 162 74 / 0.4); }
+#items-list .item-edit-btns .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); }
 
 .file-row {
     display: flex;
