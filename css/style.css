@@ -1891,10 +1891,10 @@ input::placeholder {
     .welcome-description { font-size: 1.15rem; justify-content: center; line-height: 1.6; margin-left: 0; }
     .welcome-btns { flex-wrap: wrap; justify-content: center; margin-left: 0; }
 
-    .who-are-we { height: auto; }
-    .who-image { inset: 0; position: absolute; height: 110%; }
+    .who-are-we { height: auto; overflow: hidden; }
+    .who-image { inset: 0; position: absolute; height: 100%; }
     .who-overlay, .who-reverse .who-overlay {
-        height: 110%;
+        height: 100%;
         background: linear-gradient(to right, rgba(0, 0, 0, 0.78) 45%, rgba(0, 0, 0, 0.4));
     }
     .who-wrapper, .who-reverse .who-wrapper { position: relative; justify-content: flex-start; }
