@@ -1892,7 +1892,8 @@ input::placeholder {
     .welcome-btns { flex-wrap: wrap; justify-content: center; margin-left: 0; }
 
     .who-are-we { height: auto; }
-    .who-image { inset: 0; position: absolute; }
+    .who-image { inset: 0; position: absolute; height: 110%;}
+    .who-overlay{height: 110%;}
     .who-wrapper { position: relative; }
     .who-window, .who-reverse .who-window { height: auto; margin: 0; padding: 56px 24px; width: auto; }
     .who-question { font-size: 2.6rem; margin-bottom: 24px; margin-top: 0; }
@@ -1952,7 +1953,7 @@ input::placeholder {
     .review-stat { box-sizing: border-box; width: 100%; }
 
     .values-wrapper { flex-direction: column; align-items: center; gap: 24px; padding: 0 24px; }
-    .value-card { max-width: 480px; width: 100%; padding: 0; }
+    .value-card { max-width: 480px; width: 100%; padding: 20px 5px; }
     .value-icon{margin: 0; margin-top: 10px; width: 115px; height: 115px;}
     .value-desc{ font-size: 0.9rem; margin-bottom: 20px;}
 
@@ -1992,8 +1993,11 @@ input::placeholder {
 
 @media (max-width: 480px) {
     .welcome-to { font-size: 2.1rem; }
-    .welcome-name { font-size: 2.8rem; }
+    .welcome-name { font-size: 3rem; }
     .who-question { font-size: 2.1rem; }
+    .who-window, .who-reverse .who-window { padding: 40px 20px; }
+    .who-description { font-size: 1rem; line-height: 1.6; top: 12px; }
+    .who-description br { display: none; }
     .theme-text { font-size: 1.4rem; word-spacing: 3px; }
     .theme-text::before, .theme-text::after { max-width: 30px; }
     .contact-title, .Send-us { font-size: 2rem; }
@@ -2010,9 +2014,10 @@ input::placeholder {
     .contact-2 { font-size: 0.85rem; }
     .contact-link { font-size: 1rem; }
     .contact-hours { font-size: 1rem; gap: 2px 16px; }
-    .contact-form { gap: 16px; }
+    .contact-form { gap: 10px; }
     .my-input { font-size: 1rem; height: 46px; }
     input::placeholder { font-size: 1rem; }
+    .fav-badge{font-size: 0.6rem; top: 8px; left: 8px;}
 
     .footer-row { gap: 26px; padding: 32px 18px; }
     .footer-brand h2 { font-size: 30px; }
