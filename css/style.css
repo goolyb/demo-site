@@ -1361,7 +1361,6 @@ body {
 .contact-text {
     color: #4b240c;
     font-family: "Dm Sans", sans-serif;
-    font-size: 1.6rem;
     font-weight: 600;
     margin: 0;
 }
@@ -1646,7 +1645,6 @@ input::placeholder {
 }
 
 .email-send {
-    align-items: center;
     background: rgba(255, 230, 214, 0.04);
     border: 1px solid rgba(241, 173, 70, 0.35);
     border-radius: 14px;
@@ -1658,6 +1656,8 @@ input::placeholder {
     margin: -10px 50px 50px;
     padding: 24px 30px;
     position: relative;
+    align-items: center;
+
 }
 
 .loop-icon {
@@ -1672,6 +1672,9 @@ input::placeholder {
     flex-shrink: 1;
     min-width: 200px;
     width: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .email-send-text h4 {
@@ -1708,11 +1711,10 @@ input::placeholder {
     color: #3a2114;
     flex: 1;
     font-family: "Inter", sans-serif;
-    font-size: 1rem;
     font-size: 1.2rem;
     min-width: 200px;
     outline: none;
-    padding: 0.9em 1.1em;
+    padding: 0.7em 1.1em;
     transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
 }
 
@@ -1723,7 +1725,7 @@ input::placeholder {
     color: #fff3e6;
     cursor: pointer;
     flex-shrink: 0;
-    font-size: 1.25rem;
+    font-size: 1rem;
     padding: 0 1.2em;
     transition: background 0.3s, transform 0.3s;
 }
@@ -1914,6 +1916,7 @@ input::placeholder {
         width: 90%;
     }
     .fav-item { margin-top: 0; }
+    .fav-price{ font-size: 1.2rem}
     .see-menu-wrapper { margin-top: 30px; }
     .see-menu { font-size: 1.1rem; padding: 14px 28px; }
 
@@ -1940,7 +1943,7 @@ input::placeholder {
         width: 100% !important;
     }
     .review-avatar, .review-card .review-avatar { height: auto; margin-left: 0 !important; width: auto; }
-    .avatar { height: 64px; width: 64px; }
+    .avatar { height: 84px; width: 84px; }
     .review-info-wrapper { height: auto; width: 100%; }
     .review-info { margin-bottom: 0; margin-left: 0; }
     .review-text1 { font-size: 1.05rem; line-height: 1.6; width: 100%; }
@@ -1949,14 +1952,17 @@ input::placeholder {
     .review-stat { box-sizing: border-box; width: 100%; }
 
     .values-wrapper { flex-direction: column; align-items: center; gap: 24px; padding: 0 24px; }
-    .value-card { max-width: 480px; width: 100%; }
+    .value-card { max-width: 480px; width: 100%; padding: 0; }
+    .value-icon{margin: 0; margin-top: 10px; width: 115px; height: 115px;}
+    .value-desc{ font-size: 0.9rem; margin-bottom: 20px;}
 
     .contact-wrapper { box-sizing: border-box; flex-direction: column; gap: 40px; padding: 60px 20px; }
     .contact-info { box-sizing: border-box; margin-left: 0; padding: 28px 24px; width: 100%; }
     .contact-form { margin-right: 0; width: 100%; }
     .contact-title { font-size: 2.4rem; }
     .Send-us { font-size: 2.4rem; }
-    .contact-text { font-size: 1.3rem; }
+    .contact-head { font-size: 1.3rem; }
+    .contact-2 { font-size: 1.3rem; }
     .contact-link { font-size: 1.25rem; word-break: break-word; }
     .contact-hours { font-size: 1.15rem; }
     .input-wrapper { flex-direction: column; gap: 16px; }
@@ -1968,12 +1974,14 @@ input::placeholder {
     .footer-col { margin-top: 0; }
     .footer-brand { left: 0; }
     .footer-brand h2 { font-size: 40px; margin: 0 0 6px 0; }
-    .foot-nav-wrapper { flex-wrap: wrap; gap: 28px 40px; justify-content: flex-start; margin-top: 0; }
+    .foot-nav-wrapper { align-items: flex-start; flex-wrap: nowrap; gap: 20px; justify-content: space-between; margin-top: 0; width: 100%; }
+    .foot-nav { flex: 1 1 0; min-width: 0; }
+    .foot-nav a { white-space: normal; align-self: stretch; }
     .foot-nav::before { display: none; }
     .right-wrapper { margin-right: 0; margin-top: 0; }
     .right-top { align-items: flex-start; flex-direction: column; gap: 30px; }
     .foot-discri h4 { font-size: 30px; }
-    .email-send { align-items: flex-start; flex-direction: column; gap: 16px; margin: 0 24px 40px; }
+    .email-send { align-items: center; flex-direction: column; gap: 16px; margin: 0 24px 40px; }
     .loop-icon { height: 90px; margin-right: 0; }
     .email-send-text h4 { font-size: 1.9rem; }
     .email-form { margin: 0; width: 100%; }
@@ -1991,15 +1999,15 @@ input::placeholder {
     .contact-title, .Send-us { font-size: 2rem; }
     .review-upper-text { font-size: 2rem; }
     .review-mid-number { font-size: 4rem; }
+    .reviewer-name { margin-top: 0; }
 
     .contact-wrapper { padding: 40px 14px; gap: 28px; }
     .contact-info { border-radius: 16px; gap: 12px; padding: 20px 16px; }
     .contact-title { font-size: 1.9rem; margin-top: 0; }
     .info-group { gap: 12px; padding-top: 14px; }
-    .info-group1 { font-size: 22px; align-items: flex-start; }
+    .info-group1 { font-size: 32px; align-items: center; }
     .contact-head { font-size: 0.95rem; }
-    .contact-2 { font-size: 0.95rem; }
-    .contact-text { font-size: 1.05rem; }
+    .contact-2 { font-size: 0.85rem; }
     .contact-link { font-size: 1rem; }
     .contact-hours { font-size: 1rem; gap: 2px 16px; }
     .contact-form { gap: 16px; }
@@ -2009,7 +2017,7 @@ input::placeholder {
     .footer-row { gap: 26px; padding: 32px 18px; }
     .footer-brand h2 { font-size: 30px; }
     .footer-brand-p2 { margin-top: 12px; }
-    .foot-nav-wrapper { gap: 22px 32px; }
+    .foot-nav-wrapper { gap: 14px; }
     .foot-nav h4 { font-size: 15px; margin-bottom: 10px; }
     .foot-nav a { font-size: 14px; margin-bottom: 2px; }
     .foot-discri { gap: 12px; }
@@ -2021,7 +2029,7 @@ input::placeholder {
     .foot-location-icon, .foot-clock-icon { height: 26px; width: 26px; font-size: 26px; }
     .right-top { gap: 22px; }
     .email-send { gap: 12px; margin: 0 18px 32px; padding: 20px 18px; }
-    .loop-icon { height: 64px; }
+    .loop-icon { height: 84px; }
     .email-send-text h4 { font-size: 1.5rem; }
     .email-send-text p { font-size: 1rem; line-height: 1.5; }
     .footer { min-height: 0; }
